@@ -1,0 +1,49 @@
+.formContainer {
+    max-width: 400px; 
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .label {
+    font-size: 1.25rem;
+    color: blue;
+    margin-bottom: 5px;
+  }
+  
+  .input {
+    width: 95%;
+    height: 40px;
+    margin-bottom: 15px;
+    padding: 0 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    &:hover {
+      color: navy;
+      font-weight: bolder;
+  }
+  }
+  
+  .button {
+    width: 100%;
+    height: 50px;
+    border-radius: 5px;
+    background-color: blue;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: darkblue;
+    }
+  }
+  
+  .errorMessage {
+    font-size: 0.85rem;
+    color: red;
+  }
+  

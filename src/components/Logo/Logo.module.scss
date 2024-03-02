@@ -1,0 +1,30 @@
+  // Animations
+  @keyframes logoTransition {
+    0% {
+      transform: scale(0.25); 
+      opacity: 0; 
+    }
+    100% {
+      transform: scale(1); 
+      opacity: 1; 
+    }
+  }
+
+.Logo {
+    height: 18vmin;
+    width: 18vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: var(--orange);
+    color: blue;
+    font-size: 3vmin;
+    border: 2px solid lightblue;
+    animation: logoTransition 1s ease-in-out forwards;
+  }
+
+  .Logo {
+    transition: color 1s ease-in-out, border-color 1s ease-in-out;
+  }
