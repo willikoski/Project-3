@@ -6,7 +6,8 @@
     color: var(--text-light);
     background-color: var(--white);
     border-top: .1vmin solid var(--tan-3);
-    font-size: 1.5vw;
+    font-size: 1.15vw;
+    font-weight: bolder; 
     }
     
     .LineItem:last-child {
@@ -30,3 +31,30 @@
     .LineItem button {
     margin: 0;
     }
+
+    .limegreen{
+        font-weight: bolder;
+        color: limegreen !important;
+    }
+
+    .LineItem button {
+        margin: 0;
+        background-color: lightblue;
+        font-weight: bolder;
+        color: white;
+        padding-left: .25rem; 
+        padding-right: .25rem;
+        font-size: 1.1vw; 
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        border-radius: 4px;
+        border: 2px solid black;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+      
+    .LineItem button:hover {
+        background-color: white;
+        color: lightblue;
+    }
+      

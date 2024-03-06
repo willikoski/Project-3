@@ -2,13 +2,24 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    margin-left: 5vmin; /* Lets add spacing from the left covering our buttons */
     padding: 3vmin;
     font-size: 2vmin;
     color: var(--text-light);
+    border: 5px solid black;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .OrderDetail .sectionHeading {
-    width: 100%
+    width: 100%;
+    border-bottom: 5px solid black;
+    border-radius: 3px;
+
+    .orderDate {
+      color: lightblue;
+      font-weight: bolder;
+    }
   }
   
   .OrderDetail .lineItemContainer {
@@ -45,3 +56,31 @@
     top: 50vh;
     font-size: 2vmin;
   }
+
+  .btnSm {
+    background-color: lightblue;
+    color: white;
+    padding: 0.6vmin 1vmin;
+    font-size: 1.15vmin;
+    width: auto;
+    height: auto; 
+    min-width: 90px; 
+    min-height: 30px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 2px solid black;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-weight: bolder;
+
+    &:hover {
+      background-color: white;
+      color: lightblue;
+    }
+  }
+
+  .limegreen{
+    font-weight: bolder;
+    color: limegreen !important;
+  }
+  

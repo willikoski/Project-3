@@ -37,3 +37,25 @@
     text-align: center;
     color: var(--text-light);
   }
+
+  .btnSm {
+    background-color: lightblue;
+    color: white;
+    padding: 0.6vmin 1vmin;
+    font-size: 1.25vmin;
+    width: auto;
+    height: auto; 
+    min-width: 90px; 
+    min-height: 30px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: 2px solid black;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background-color: white;
+      color: lightblue;
+    }
+  }
+  

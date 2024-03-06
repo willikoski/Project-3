@@ -1,8 +1,37 @@
 .MenuList {
-    background-color: var(--tan-1);
-    border: .1vmin solid var(--tan-3);
-    border-radius: 2vmin;
-    margin: 3vmin 0;
-    padding: 3vmin;
-    overflow-y: scroll;
+    color: var(--text-light);
+    list-style: none;
+    padding: 0;
+    font-size: 1.25vw;
+  }
+  
+  .MenuList li {
+    padding: 1vmin;
+    text-align: center;
+    margin-bottom: 0.5vmin;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+    background-color: lightblue;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /*w3 schools */
+  
+    &:hover {
+      transform: translateY(3px);
     }
+  }
+  
+  .MenuList li:hover:not(.active) {
+    background-color: var(--orange);
+    color: var(--white);
+    transform: translateY(-3px); /*Lift visualization*/
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }
+  
+  .MenuList li.active {
+    color: var(--text-dark);
+    background-color: var(--tan-1);
+    border: 0.1vmin solid var(--tan-3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  }

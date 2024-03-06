@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
+.anton-regular {
+  font-family: 'Anton', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+} 
   // Animations
   @keyframes logoTransition {
     0% {
@@ -17,14 +24,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
+    border-radius: 90%;
     background-color: var(--orange);
     color: blue;
     font-size: 3vmin;
-    border: 2px solid lightblue;
+    border-bottom: 4px solid lightblue;
     animation: logoTransition 1s ease-in-out forwards;
   }
 
   .Logo {
     transition: color 1s ease-in-out, border-color 1s ease-in-out;
+  }
+
+  .Logo div {
+    border-bottom: 3px solid blue;
+    border-radius: 3px;
   }
