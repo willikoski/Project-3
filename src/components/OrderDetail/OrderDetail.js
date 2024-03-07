@@ -5,15 +5,14 @@ import LineItem from '../LineItem/LineItem';
 export default function OrderDetail({ order, handleChangeQty, handleCheckout }) {
     if (!order) return null;
 
-    const lineItems = order.lineItems.map(item =>
+    const lineItems = order.lineItems.map(item => (
       <LineItem
-        lineItem={item}
-        isPaid={order.isPaid}
-        handleChangeQty={handleChangeQty}
-        key={item._id}
+      lineItem={item}
+      isPaid={order.isPaid}
+      handleChangeQty={handleChangeQty}
+      key={item._id}
       />
-    );
-
+    ));
     return (
       <div className={styles.OrderDetail}>
         <div className={styles.sectionHeading}>

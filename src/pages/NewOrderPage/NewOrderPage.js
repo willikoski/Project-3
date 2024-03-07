@@ -38,11 +38,12 @@ export default function NewOrderPage({ user, setUser }) {
   // the FIRST render only
 
   /*-- Event Handlers --*/
-  async function handleAddToOrder(itemId) {
+  async function handleAddToOrder(itemId, newQty) {
     const updatedCart = await ordersAPI.addItemToCart(itemId);
     setCart(updatedCart);
+    handleChangeQty(itemId, newQty)
   }
-
+  
   async function handleChangeQty(itemId, newQty) {
     const updatedCart = await ordersAPI.setItemQtyInCart(itemId, newQty);
     setCart(updatedCart);

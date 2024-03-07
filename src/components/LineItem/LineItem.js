@@ -16,7 +16,12 @@ return (
           onClick={() => handleChangeQty(lineItem.item._id, lineItem.qty - 1)}
         >−</button>
       }
-      <span>{lineItem.qty}</span>
+        <input
+           className={styles.quantityInput}
+           value={lineItem.qty}
+           onChange={(e) => handleChangeQty(lineItem.item._id, parseInt(e.target.value))}
+           min="1"
+        />
       {!isPaid &&
         <button
           className={styles.button}

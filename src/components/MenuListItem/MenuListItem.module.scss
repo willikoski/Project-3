@@ -1,21 +1,19 @@
 .MenuListItem {
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3vmin;
-    padding: 2vmin;
+    padding: .3vmin;
     color: var(--text-light);
     background-color: var(--white);
     border: .1vmin solid var(--tan-3);
-    border-radius: 1vmin;
-    font-size: 4vmin;
+    border-bottom: 4px solid black;
+    border-radius: 2px;
   }
   
   .MenuListItem .emoji {
-    height: 8vw;
-    width: 8vw;
-    font-size: 4vw;
+    width: 2vw;
+    font-size: 2.5vw;
     background-color: var(--tan-1);
     border: .1vmin solid var(--tan-3);
     border-radius: 1vmin;
@@ -23,17 +21,20 @@
   
   .MenuListItem .buy {
     display: flex;
+    max-width: 166px;
     flex-direction: column;
+    margin-bottom: .1rem;
   }
   
   .MenuListItem .buy span {
-    font-size: 1.7vw;
+    font-size: 1.3vw;
+    margin-bottom: 0;
     text-align: center;
     color: var(--text-light);
   }
   
   .MenuListItem .name {
-    font-size: 2vw;
+    font-size: 1.5vw;
     text-align: center;
     color: var(--text-light);
   }
@@ -42,7 +43,7 @@
     background-color: lightblue;
     color: white;
     padding: 0.6vmin 1vmin;
-    font-size: 1.25vmin;
+    font-size: 1.15vmin;
     width: auto;
     height: auto; 
     min-width: 90px; 
@@ -58,4 +59,43 @@
       color: lightblue;
     }
   }
+  
+  .limegreen{
+    font-weight: bolder;
+    color: limegreen !important;
+  }
+
+  .quantityInput {
+    padding: 0.5vmin .6vmin;
+    text-align: center;
+    font-size: 1.4vmin;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 50px;
+    border: 2px solid black;
+    border-radius: 4px;
+    margin-bottom: .1rem;
+    font-weight: bolder;
+  }
+
+  .quantityButton {
+    margin: 0;
+    background-color: lightblue;
+    font-weight: bolder;
+    color: white;
+    padding: 0.5vmin .6vmin;
+    font-size: 1.4vmin;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+    border: 2px solid black;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      background-color: white;
+      color: lightblue;
+    }
+}
   

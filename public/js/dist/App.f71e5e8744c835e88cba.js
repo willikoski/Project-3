@@ -71,7 +71,12 @@ function LineItem(_ref) {
   }, !isPaid && /*#__PURE__*/React.createElement("button", {
     className: _LineItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].button,
     onClick: () => handleChangeQty(lineItem.item._id, lineItem.qty - 1)
-  }, "\u2212"), /*#__PURE__*/React.createElement("span", null, lineItem.qty), !isPaid && /*#__PURE__*/React.createElement("button", {
+  }, "\u2212"), /*#__PURE__*/React.createElement("input", {
+    className: _LineItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].quantityInput,
+    value: lineItem.qty,
+    onChange: e => handleChangeQty(lineItem.item._id, parseInt(e.target.value)),
+    min: "1"
+  }), !isPaid && /*#__PURE__*/React.createElement("button", {
     className: _LineItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].button,
     onClick: () => handleChangeQty(lineItem.item._id, lineItem.qty + 1)
   }, "+")), /*#__PURE__*/React.createElement("div", {
@@ -191,25 +196,50 @@ function Logo() {
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ MenuListItem)
 /* harmony export */ });
-/* harmony import */ var _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MenuListItem.module.scss */ "./src/components/MenuListItem/MenuListItem.module.scss");
-/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MenuListItem.module.scss */ "./src/components/MenuListItem/MenuListItem.module.scss");
+
 
 function MenuListItem(_ref) {
   let {
     menuItem,
     handleAddToOrder
   } = _ref;
-  return /*#__PURE__*/React.createElement("div", {
-    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].MenuListItem
-  }, /*#__PURE__*/React.createElement("div", {
-    className: "".concat(_MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].emoji, " flex-ctr-ctr")
-  }, menuItem.emoji), /*#__PURE__*/React.createElement("div", {
-    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].name
-  }, menuItem.name), /*#__PURE__*/React.createElement("div", {
-    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].buy
-  }, /*#__PURE__*/React.createElement("span", null, "$", menuItem.price.toFixed(2)), /*#__PURE__*/React.createElement("button", {
-    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].btnSm,
-    onClick: () => handleAddToOrder(menuItem._id)
+  const [quantity, setQuantity] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(1); // start at 1 always
+
+  const handleChange = event => {
+    const value = event.target.value; // postive values only 
+    if (value === '' || value > 0 && !isNaN(value) && value.indexOf('.') === -1) {
+      setQuantity(parseInt(value));
+    }
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].MenuListItem
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "".concat(_MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].emoji, " flex-ctr-ctr")
+  }, menuItem.emoji), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].name
+  }, menuItem.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].buy
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].limegreen
+  }, "$"), menuItem.price.toFixed(2)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].quantityControl
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].quantityButton,
+    onClick: () => setQuantity(quantity > 1 ? quantity - 1 : 1)
+  }, "-"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].quantityInput,
+    value: quantity,
+    onChange: handleChange,
+    min: "1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].quantityButton,
+    onClick: () => setQuantity(quantity + 1)
+  }, "+")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].btnSm,
+    onClick: () => handleAddToOrder(menuItem._id, quantity)
   }, "ADD")));
 }
 
@@ -651,9 +681,10 @@ function NewOrderPage(_ref) {
   // the FIRST render only
 
   /*-- Event Handlers --*/
-  async function handleAddToOrder(itemId) {
+  async function handleAddToOrder(itemId, newQty) {
     const updatedCart = await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.addItemToCart(itemId);
     setCart(updatedCart);
+    handleChangeQty(itemId, newQty);
   }
   async function handleChangeQty(itemId, newQty) {
     const updatedCart = await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.setItemQtyInCart(itemId, newQty);
@@ -1133,7 +1164,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.ZeRW57PNaWpYVsw6JlaC {
 
 .ZeRW57PNaWpYVsw6JlaC .Z_MQzAiRjTlxboCrh9om {
   display: flex;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   align-items: center;
   font-size: 1.3vw;
 }
@@ -1173,13 +1204,26 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.ZeRW57PNaWpYVsw6JlaC {
 .ZeRW57PNaWpYVsw6JlaC button:hover {
   background-color: white;
   color: lightblue;
-}`, "",{"version":3,"sources":["webpack://./src/components/LineItem/LineItem.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,aAAA;EACA,gDAAA;EACA,gBAAA;EACA,wBAAA;EACA,8BAAA;EACA,sCAAA;EACA,iBAAA;EACA,mBAAA;AACJ;;AAEI;EACA,yCAAA;AACJ;;AAEI;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,gBAAA;AACJ;;AAEI;EACA,aAAA;EACA,yBAAA;EACA,mBAAA;EACA,gBAAA;AACJ;;AAEI;EACA,SAAA;AACJ;;AAEI;EACI,mBAAA;EACA,2BAAA;AACR;;AAEI;EACI,SAAA;EACA,2BAAA;EACA,mBAAA;EACA,YAAA;EACA,qBAAA;EACA,sBAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,kBAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AACR;;AAEI;EACI,uBAAA;EACA,gBAAA;AACR","sourcesContent":[".LineItem {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 3vw 15.35vw 5.75vw 5.25vw;\n    padding: 1vmin 0;\n    color: var(--text-light);\n    background-color: var(--white);\n    border-top: .1vmin solid var(--tan-3);\n    font-size: 1.15vw;\n    font-weight: bolder; \n    }\n    \n    .LineItem:last-child {\n    border-bottom: .1vmin solid var(--tan-3);\n    }\n    \n    .LineItem .qty {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    font-size: 1.3vw;\n    }\n    \n    .LineItem .extPrice {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    font-size: 1.3vw;\n    }\n    \n    .LineItem button {\n    margin: 0;\n    }\n\n    .limegreen{\n        font-weight: bolder;\n        color: limegreen !important;\n    }\n\n    .LineItem button {\n        margin: 0;\n        background-color: lightblue;\n        font-weight: bolder;\n        color: white;\n        padding-left: .25rem; \n        padding-right: .25rem;\n        font-size: 1.1vw; \n        cursor: pointer;\n        transition: background-color 0.3s ease;\n        border-radius: 4px;\n        border: 2px solid black;\n        border-radius: 4px;\n        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n      \n    .LineItem button:hover {\n        background-color: white;\n        color: lightblue;\n    }\n      "],"sourceRoot":""}]);
+}
+
+.Y4FWReu8jPnZglvYzTQ8 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  text-align: center;
+  font-size: 1.4vmin;
+  font-weight: bold;
+  max-width: 40px;
+  border: 2px solid black;
+  border-radius: 4px;
+  font-weight: bolder;
+}`, "",{"version":3,"sources":["webpack://./src/components/LineItem/LineItem.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,aAAA;EACA,gDAAA;EACA,gBAAA;EACA,wBAAA;EACA,8BAAA;EACA,sCAAA;EACA,iBAAA;EACA,mBAAA;AACJ;;AAEI;EACA,yCAAA;AACJ;;AAEI;EACA,aAAA;EACA,kCAAA;EACA,mBAAA;EACA,gBAAA;AACJ;;AAEI;EACA,aAAA;EACA,yBAAA;EACA,mBAAA;EACA,gBAAA;AACJ;;AAEI;EACA,SAAA;AACJ;;AAEI;EACI,mBAAA;EACA,2BAAA;AACR;;AAEI;EACI,SAAA;EACA,2BAAA;EACA,mBAAA;EACA,YAAA;EACA,qBAAA;EACA,sBAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,kBAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AACR;;AAEI;EACI,uBAAA;EACA,gBAAA;AACR;;AAEI;EACI,qBAAA;EACA,sBAAA;EACA,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,eAAA;EACA,uBAAA;EACA,kBAAA;EACA,mBAAA;AACR","sourcesContent":[".LineItem {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 3vw 15.35vw 5.75vw 5.25vw;\n    padding: 1vmin 0;\n    color: var(--text-light);\n    background-color: var(--white);\n    border-top: .1vmin solid var(--tan-3);\n    font-size: 1.15vw;\n    font-weight: bolder; \n    }\n    \n    .LineItem:last-child {\n    border-bottom: .1vmin solid var(--tan-3);\n    }\n    \n    .LineItem .qty {\n    display: flex;\n    /*justify-content: space-between;*/\n    align-items: center;\n    font-size: 1.3vw;\n    }\n    \n    .LineItem .extPrice {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    font-size: 1.3vw;\n    }\n    \n    .LineItem button {\n    margin: 0;\n    }\n\n    .limegreen{\n        font-weight: bolder;\n        color: limegreen !important;\n    }\n\n    .LineItem button {\n        margin: 0;\n        background-color: lightblue;\n        font-weight: bolder;\n        color: white;\n        padding-left: .25rem; \n        padding-right: .25rem;\n        font-size: 1.1vw; \n        cursor: pointer;\n        transition: background-color 0.3s ease;\n        border-radius: 4px;\n        border: 2px solid black;\n        border-radius: 4px;\n        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n      \n    .LineItem button:hover {\n        background-color: white;\n        color: lightblue;\n    }\n      \n    .quantityInput {\n        padding-left: .25rem; \n        padding-right: .25rem;\n        text-align: center;\n        font-size: 1.4vmin;\n        font-weight: bold;\n        max-width: 40px;\n        border: 2px solid black;\n        border-radius: 4px;\n        font-weight: bolder;\n      }"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"LineItem": `ZeRW57PNaWpYVsw6JlaC`,
 	"qty": `Z_MQzAiRjTlxboCrh9om`,
 	"extPrice": `iZ6oJDRJlBAjRnxPhUy5`,
-	"limegreen": `FAifOxxG3ZvxK1RxGqn3`
+	"limegreen": `FAifOxxG3ZvxK1RxGqn3`,
+	"quantityInput": `Y4FWReu8jPnZglvYzTQ8`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1353,23 +1397,21 @@ ___CSS_LOADER_EXPORT___.locals = {
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.X4tFBfG4MKknHvd01CKE {
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3vmin;
-  padding: 2vmin;
+  padding: 0.3vmin;
   color: var(--text-light);
   background-color: var(--white);
   border: 0.1vmin solid var(--tan-3);
-  border-radius: 1vmin;
-  font-size: 4vmin;
+  border-bottom: 4px solid black;
+  border-radius: 2px;
 }
 
 .X4tFBfG4MKknHvd01CKE .GqkE12RHPdZZg1360W4p {
-  height: 8vw;
-  width: 8vw;
-  font-size: 4vw;
+  width: 2vw;
+  font-size: 2.5vw;
   background-color: var(--tan-1);
   border: 0.1vmin solid var(--tan-3);
   border-radius: 1vmin;
@@ -1377,17 +1419,20 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.X4tFBfG4MKknHvd01CKE {
 
 .X4tFBfG4MKknHvd01CKE .fO9kiPygtr0vmzsXoUxA {
   display: flex;
+  max-width: 166px;
   flex-direction: column;
+  margin-bottom: 0.1rem;
 }
 
 .X4tFBfG4MKknHvd01CKE .fO9kiPygtr0vmzsXoUxA span {
-  font-size: 1.7vw;
+  font-size: 1.3vw;
+  margin-bottom: 0;
   text-align: center;
   color: var(--text-light);
 }
 
 .X4tFBfG4MKknHvd01CKE .VR1OCl60qOXrRx1IzVEa {
-  font-size: 2vw;
+  font-size: 1.5vw;
   text-align: center;
   color: var(--text-light);
 }
@@ -1396,7 +1441,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.X4tFBfG4MKknHvd01CKE {
   background-color: lightblue;
   color: white;
   padding: 0.6vmin 1vmin;
-  font-size: 1.25vmin;
+  font-size: 1.15vmin;
   width: auto;
   height: auto;
   min-width: 90px;
@@ -1410,14 +1455,55 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.X4tFBfG4MKknHvd01CKE {
 .f7X_MS6ZkwPF9YBm6IUH:hover {
   background-color: white;
   color: lightblue;
-}`, "",{"version":3,"sources":["webpack://./src/components/MenuListItem/MenuListItem.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,oBAAA;EACA,cAAA;EACA,wBAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;EACA,gBAAA;AACJ;;AAEE;EACE,WAAA;EACA,UAAA;EACA,cAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;AACJ;;AAEE;EACE,aAAA;EACA,sBAAA;AACJ;;AAEE;EACE,gBAAA;EACA,kBAAA;EACA,wBAAA;AACJ;;AAEE;EACE,cAAA;EACA,kBAAA;EACA,wBAAA;AACJ;;AAEE;EACE,2BAAA;EACA,YAAA;EACA,sBAAA;EACA,mBAAA;EACA,WAAA;EACA,YAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AACJ;AACI;EACE,uBAAA;EACA,gBAAA;AACN","sourcesContent":[".MenuListItem {\n    width: 100%;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    margin-bottom: 3vmin;\n    padding: 2vmin;\n    color: var(--text-light);\n    background-color: var(--white);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n    font-size: 4vmin;\n  }\n  \n  .MenuListItem .emoji {\n    height: 8vw;\n    width: 8vw;\n    font-size: 4vw;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n  }\n  \n  .MenuListItem .buy {\n    display: flex;\n    flex-direction: column;\n  }\n  \n  .MenuListItem .buy span {\n    font-size: 1.7vw;\n    text-align: center;\n    color: var(--text-light);\n  }\n  \n  .MenuListItem .name {\n    font-size: 2vw;\n    text-align: center;\n    color: var(--text-light);\n  }\n\n  .btnSm {\n    background-color: lightblue;\n    color: white;\n    padding: 0.6vmin 1vmin;\n    font-size: 1.25vmin;\n    width: auto;\n    height: auto; \n    min-width: 90px; \n    min-height: 30px; \n    cursor: pointer;\n    transition: background-color 0.3s ease;\n    border: 2px solid black;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n\n    &:hover {\n      background-color: white;\n      color: lightblue;\n    }\n  }\n  "],"sourceRoot":""}]);
+}
+
+.SdQP6n7rg1qY5WdSX1jE {
+  font-weight: bolder;
+  color: limegreen !important;
+}
+
+.iRoK_1vNQ0OuU4t5zRQX {
+  padding: 0.5vmin 0.6vmin;
+  text-align: center;
+  font-size: 1.4vmin;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 50px;
+  border: 2px solid black;
+  border-radius: 4px;
+  margin-bottom: 0.1rem;
+  font-weight: bolder;
+}
+
+.tGKW_CCkzeJ2zxiz2cql {
+  margin: 0;
+  background-color: lightblue;
+  font-weight: bolder;
+  color: white;
+  padding: 0.5vmin 0.6vmin;
+  font-size: 1.4vmin;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+  border: 2px solid black;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.tGKW_CCkzeJ2zxiz2cql:hover {
+  background-color: white;
+  color: lightblue;
+}`, "",{"version":3,"sources":["webpack://./src/components/MenuListItem/MenuListItem.module.scss"],"names":[],"mappings":"AAAA;EACI,UAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,gBAAA;EACA,wBAAA;EACA,8BAAA;EACA,kCAAA;EACA,8BAAA;EACA,kBAAA;AACJ;;AAEE;EACE,UAAA;EACA,gBAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;AACJ;;AAEE;EACE,aAAA;EACA,gBAAA;EACA,sBAAA;EACA,qBAAA;AACJ;;AAEE;EACE,gBAAA;EACA,gBAAA;EACA,kBAAA;EACA,wBAAA;AACJ;;AAEE;EACE,gBAAA;EACA,kBAAA;EACA,wBAAA;AACJ;;AAEE;EACE,2BAAA;EACA,YAAA;EACA,sBAAA;EACA,mBAAA;EACA,WAAA;EACA,YAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AACJ;AACI;EACE,uBAAA;EACA,gBAAA;AACN;;AAGE;EACE,mBAAA;EACA,2BAAA;AAAJ;;AAGE;EACE,wBAAA;EACA,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,iBAAA;EACA,kBAAA;EACA,eAAA;EACA,uBAAA;EACA,kBAAA;EACA,qBAAA;EACA,mBAAA;AAAJ;;AAGE;EACE,SAAA;EACA,2BAAA;EACA,mBAAA;EACA,YAAA;EACA,wBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,kBAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AAAJ;AAEI;EACE,uBAAA;EACA,gBAAA;AAAN","sourcesContent":[".MenuListItem {\n    width: 90%;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: .3vmin;\n    color: var(--text-light);\n    background-color: var(--white);\n    border: .1vmin solid var(--tan-3);\n    border-bottom: 4px solid black;\n    border-radius: 2px;\n  }\n  \n  .MenuListItem .emoji {\n    width: 2vw;\n    font-size: 2.5vw;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n  }\n  \n  .MenuListItem .buy {\n    display: flex;\n    max-width: 166px;\n    flex-direction: column;\n    margin-bottom: .1rem;\n  }\n  \n  .MenuListItem .buy span {\n    font-size: 1.3vw;\n    margin-bottom: 0;\n    text-align: center;\n    color: var(--text-light);\n  }\n  \n  .MenuListItem .name {\n    font-size: 1.5vw;\n    text-align: center;\n    color: var(--text-light);\n  }\n\n  .btnSm {\n    background-color: lightblue;\n    color: white;\n    padding: 0.6vmin 1vmin;\n    font-size: 1.15vmin;\n    width: auto;\n    height: auto; \n    min-width: 90px; \n    min-height: 30px; \n    cursor: pointer;\n    transition: background-color 0.3s ease;\n    border: 2px solid black;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n\n    &:hover {\n      background-color: white;\n      color: lightblue;\n    }\n  }\n  \n  .limegreen{\n    font-weight: bolder;\n    color: limegreen !important;\n  }\n\n  .quantityInput {\n    padding: 0.5vmin .6vmin;\n    text-align: center;\n    font-size: 1.4vmin;\n    font-weight: bold;\n    margin-left: auto;\n    margin-right: auto;\n    max-width: 50px;\n    border: 2px solid black;\n    border-radius: 4px;\n    margin-bottom: .1rem;\n    font-weight: bolder;\n  }\n\n  .quantityButton {\n    margin: 0;\n    background-color: lightblue;\n    font-weight: bolder;\n    color: white;\n    padding: 0.5vmin .6vmin;\n    font-size: 1.4vmin;\n    cursor: pointer;\n    transition: background-color 0.3s ease;\n    border-radius: 4px;\n    border: 2px solid black;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n\n    &:hover {\n      background-color: white;\n      color: lightblue;\n    }\n}\n  "],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"MenuListItem": `X4tFBfG4MKknHvd01CKE`,
 	"emoji": `GqkE12RHPdZZg1360W4p`,
 	"buy": `fO9kiPygtr0vmzsXoUxA`,
 	"name": `VR1OCl60qOXrRx1IzVEa`,
-	"btnSm": `f7X_MS6ZkwPF9YBm6IUH`
+	"btnSm": `f7X_MS6ZkwPF9YBm6IUH`,
+	"limegreen": `SdQP6n7rg1qY5WdSX1jE`,
+	"quantityInput": `iRoK_1vNQ0OuU4t5zRQX`,
+	"quantityButton": `tGKW_CCkzeJ2zxiz2cql`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1443,45 +1529,17 @@ ___CSS_LOADER_EXPORT___.locals = {
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.eBz5FvD9TgyIgfFi1MdG {
-  color: var(--text-light);
-  list-style: none;
-  padding: 0;
-  font-size: 1.25vw;
-}
-
-.eBz5FvD9TgyIgfFi1MdG li {
-  padding: 1vmin;
-  text-align: center;
-  margin-bottom: 0.5vmin;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
-  background-color: lightblue;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /*w3 schools */
-}
-.eBz5FvD9TgyIgfFi1MdG li:hover {
-  transform: translateY(3px);
-}
-
-.eBz5FvD9TgyIgfFi1MdG li:hover:not(._Eib0_1t3aJ4PRouJR_t) {
-  background-color: var(--orange);
-  color: var(--white);
-  transform: translateY(-3px); /*Lift visualization*/
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.eBz5FvD9TgyIgfFi1MdG li._Eib0_1t3aJ4PRouJR_t {
-  color: var(--text-dark);
-  background-color: var(--tan-1);
-  border: 0.1vmin solid var(--tan-3);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}`, "",{"version":3,"sources":["webpack://./src/components/MenuList/MenuList.module.scss"],"names":[],"mappings":"AAAA;EACI,wBAAA;EACA,gBAAA;EACA,UAAA;EACA,iBAAA;AACJ;;AAEE;EACE,cAAA;EACA,kBAAA;EACA,sBAAA;EACA,YAAA;EACA,eAAA;EACA,kGAAA;EACA,2BAAA;EACA,kBAAA;EACA,wCAAA,EAAA,cAAA;AACJ;AACI;EACE,0BAAA;AACN;;AAGE;EACE,+BAAA;EACA,mBAAA;EACA,2BAAA,EAAA,qBAAA;EACA,uBAAA;EACA,wCAAA;AAAJ;;AAGE;EACE,uBAAA;EACA,8BAAA;EACA,kCAAA;EACA,wCAAA;AAAJ","sourcesContent":[".MenuList {\n    color: var(--text-light);\n    list-style: none;\n    padding: 0;\n    font-size: 1.25vw;\n  }\n  \n  .MenuList li {\n    padding: 1vmin;\n    text-align: center;\n    margin-bottom: 0.5vmin;\n    color: white;\n    cursor: pointer;\n    transition: background-color 0.5s ease, color 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;\n    background-color: lightblue;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /*w3 schools */\n  \n    &:hover {\n      transform: translateY(3px);\n    }\n  }\n  \n  .MenuList li:hover:not(.active) {\n    background-color: var(--orange);\n    color: var(--white);\n    transform: translateY(-3px); /*Lift visualization*/\n    background-color: white;\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); \n  }\n  \n  .MenuList li.active {\n    color: var(--text-dark);\n    background-color: var(--tan-1);\n    border: 0.1vmin solid var(--tan-3);\n    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); \n  }"],"sourceRoot":""}]);
+  margin-top: 6rem;
+  background-color: lightgray;
+  border: 0.4vmin solid black;
+  border-radius: 2vmin;
+  margin: 3vmin 0;
+  padding: 3vmin;
+  /*overflow-y: scroll;*/
+}`, "",{"version":3,"sources":["webpack://./src/components/MenuList/MenuList.module.scss"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,2BAAA;EACA,2BAAA;EACA,oBAAA;EACA,eAAA;EACA,cAAA;EACA,sBAAA;AACJ","sourcesContent":[".MenuList {\n    margin-top: 6rem;\n    background-color: lightgray;\n    border: .4vmin solid black;\n    border-radius: 2vmin;\n    margin: 3vmin 0;\n    padding: 3vmin;\n    /*overflow-y: scroll;*/\n    }"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
-	"MenuList": `eBz5FvD9TgyIgfFi1MdG`,
-	"active": `_Eib0_1t3aJ4PRouJR_t`
+	"MenuList": `eBz5FvD9TgyIgfFi1MdG`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1974,7 +2032,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.RZqTJBeYN7RXwcHgPFys {
 .k3gC92i2OCalY2XgNRZK:hover {
   background-color: #8c1225;
   font-weight: bolder;
-}`, "",{"version":3,"sources":["webpack://./src/pages/NewOrderPage/NewOrderPage.module.scss"],"names":[],"mappings":"AAAA;EACI,YAAA;EACA,aAAA;EACA,sCAAA;EACA,uBAAA;EACA,8BAAA;EACA,oBAAA;AACJ;;AAEE;EACE,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,mBAAA;AACJ;;AAEE;EACE,cAAA;EACA,gBAAA;EACA,kBAAA;EACA,2BAAA;EACA,YAAA;EACA,kBAAA;EACA,qBAAA;EACA,kBAAA;EACA,sCAAA;AACJ;AACI;EACE,yBAAA;EACA,mBAAA;AACN","sourcesContent":[".NewOrderPage {\n    height: 100%;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 1fr;\n    background-color: var(--white);\n    border-radius: 2vmin;\n  }\n  \n  .NewOrderPage aside {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 3vmin 2vmin;\n  }\n\n  .link {\n    display: block;\n    margin-top: 20px;\n    padding: 10px 20px;\n    background-color: lightblue;\n    color: white;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 5px;\n    transition: background-color 0.5s ease;\n\n    &:hover {\n      background-color: #8c1225;\n      font-weight: bolder;\n    }\n  }\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/pages/NewOrderPage/NewOrderPage.module.scss"],"names":[],"mappings":"AAAA;EACI,YAAA;EACA,aAAA;EACA,sCAAA;EACA,uBAAA;EACA,8BAAA;EACA,oBAAA;AACJ;;AAEE;EAEE,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,mBAAA;AAAJ;;AAGE;EACE,cAAA;EACA,gBAAA;EACA,kBAAA;EACA,2BAAA;EACA,YAAA;EACA,kBAAA;EACA,qBAAA;EACA,kBAAA;EACA,sCAAA;AAAJ;AAEI;EACE,yBAAA;EACA,mBAAA;AAAN","sourcesContent":[".NewOrderPage {\n    height: 100%;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 1fr;\n    background-color: var(--white);\n    border-radius: 2vmin;\n  }\n  \n  .NewOrderPage aside {\n    \n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 3vmin 2vmin;\n  }\n\n  .link {\n    display: block;\n    margin-top: 20px;\n    padding: 10px 20px;\n    background-color: lightblue;\n    color: white;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 5px;\n    transition: background-color 0.5s ease;\n\n    &:hover {\n      background-color: #8c1225;\n      font-weight: bolder;\n    }\n  }\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"NewOrderPage": `RZqTJBeYN7RXwcHgPFys`,
@@ -2021,6 +2079,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.U7F51i6q23MB43wS4GeC {
 }
 
 .V0fkWUMjSEabl62xFKEv {
+  font-size: 1.5rem;
   display: block;
   margin-top: 20px;
   padding: 10px 20px;
@@ -2034,7 +2093,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.U7F51i6q23MB43wS4GeC {
 .V0fkWUMjSEabl62xFKEv:hover {
   background-color: #8c1225;
   font-weight: bolder;
-}`, "",{"version":3,"sources":["webpack://./src/pages/OrderHistoryPage/OrderHistoryPage.module.scss"],"names":[],"mappings":"AAAA;EACI,YAAA;EACA,aAAA;EACA,sCAAA;EACA,uBAAA;EACA,8BAAA;EACA,oBAAA;AACJ;;AAEE;EACE,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,mBAAA;AACJ;;AAEE;EACE,cAAA;EACA,gBAAA;EACA,kBAAA;EACA,2BAAA;EACA,YAAA;EACA,kBAAA;EACA,qBAAA;EACA,kBAAA;EACA,sCAAA;AACJ;AACI;EACE,yBAAA;EACA,mBAAA;AACN","sourcesContent":[".OrderHistoryPage {\n    height: 100%;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 1fr;\n    background-color: var(--white);\n    border-radius: 2vmin;\n  }\n  \n  .OrderHistoryPage .aside {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 3vmin 2vmin;\n  }\n\n  .link {\n    display: block;\n    margin-top: 20px;\n    padding: 10px 20px;\n    background-color: lightblue;\n    color: white;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 5px;\n    transition: background-color 0.5s ease;\n\n    &:hover {\n      background-color: #8c1225;\n      font-weight: bolder;\n    }\n  }\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/pages/OrderHistoryPage/OrderHistoryPage.module.scss"],"names":[],"mappings":"AAAA;EACI,YAAA;EACA,aAAA;EACA,sCAAA;EACA,uBAAA;EACA,8BAAA;EACA,oBAAA;AACJ;;AAEE;EACE,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,mBAAA;AACJ;;AAEE;EACE,iBAAA;EACA,cAAA;EACA,gBAAA;EACA,kBAAA;EACA,2BAAA;EACA,YAAA;EACA,kBAAA;EACA,qBAAA;EACA,kBAAA;EACA,sCAAA;AACJ;AACI;EACE,yBAAA;EACA,mBAAA;AACN","sourcesContent":[".OrderHistoryPage {\n    height: 100%;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 1fr;\n    background-color: var(--white);\n    border-radius: 2vmin;\n  }\n  \n  .OrderHistoryPage .aside {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 3vmin 2vmin;\n  }\n\n  .link {\n    font-size: 1.5rem;\n    display: block;\n    margin-top: 20px;\n    padding: 10px 20px;\n    background-color: lightblue;\n    color: white;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 5px;\n    transition: background-color 0.5s ease;\n\n    &:hover {\n      background-color: #8c1225;\n      font-weight: bolder;\n    }\n  }\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"OrderHistoryPage": `U7F51i6q23MB43wS4GeC`,
@@ -2066,7 +2125,8 @@ var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBP
 // Module
 ___CSS_LOADER_EXPORT___.push([module.id, `.t28KGTGNA2Wz6K9neu4g {
   height: 100%;
-}`, "",{"version":3,"sources":["webpack://./src/router/AppRouter.module.scss"],"names":[],"mappings":"AAAA;EACI,YAAA;AACJ","sourcesContent":[".App {\n    height: 100%;\n  }"],"sourceRoot":""}]);
+  width: 100%;
+}`, "",{"version":3,"sources":["webpack://./src/router/AppRouter.module.scss"],"names":[],"mappings":"AAAA;EACI,YAAA;EACA,WAAA;AACJ","sourcesContent":[".App {\n    height: 100%;\n    width: 100%;\n  }\n\n  html {\n    \n  }"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"App": `t28KGTGNA2Wz6K9neu4g`
@@ -3083,4 +3143,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.ba2c7c7ee1d60c666ceba9ade9ffbd13.js.map
+//# sourceMappingURL=App.94559bef2e09641f1031c22d99ed6731.js.map

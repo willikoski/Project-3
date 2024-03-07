@@ -16,7 +16,7 @@
     
     .LineItem .qty {
     display: flex;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     align-items: center;
     font-size: 1.3vw;
     }
@@ -58,3 +58,14 @@
         color: lightblue;
     }
       
+    .quantityInput {
+        padding-left: .25rem; 
+        padding-right: .25rem;
+        text-align: center;
+        font-size: 1.4vmin;
+        font-weight: bold;
+        max-width: 40px;
+        border: 2px solid black;
+        border-radius: 4px;
+        font-weight: bolder;
+      }

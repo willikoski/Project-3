@@ -5,7 +5,8 @@ module.exports = {
   addToCart,
   setItemQtyInCart,
   checkout,
-  history
+  history,
+  addItemQtyInCart
 };
 
 // A cart is the unpaid order for a user
@@ -37,6 +38,18 @@ async function setItemQtyInCart(req, res) {
     res.status(200).json(cart);
   }catch(e){
     res.status(400).json({ msg: e.message });
+  }
+}
+
+//Add qty
+
+async function addItemQtyInCart(req, res) {
+  try {
+    const cart = await Order.getCart(req.user._id);
+    await cart.addItemQty(req.body.itemId, req.body.incrementBy); // Assuming req.body.incrementBy holds the increment value
+    res.status(200).json(cart);
+  } catch (error) {
+    res.status(400).json({ msg: error.message });
   }
 }
 
