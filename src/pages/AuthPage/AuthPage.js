@@ -19,5 +19,8 @@ export default function AuthPage({ setUser }) {
         {showLogin ? 'SIGN UP' : 'LOG IN'}
       </h3>
     </main>
+
+
+
   );
 }

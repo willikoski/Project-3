@@ -1,4 +1,5 @@
 const Order = require('../../models/order');
+const User = require('../../models/user');
 
 module.exports = {
   cart,
@@ -55,14 +56,25 @@ async function addItemQtyInCart(req, res) {
 
 // Update the cart's isPaid property to true
 async function checkout(req, res) {
-  try{
+  try {
     const cart = await Order.getCart(req.user._id);
+    // Assuming orderTotal is the total amount to be deducted from the user's balance
+    const orderTotal = cart.orderTotal;
+
+    // Update the user's balance by subtracting the order total
+    const user = await User.findById(req.user._id);
+    user.balance -= orderTotal;
+    await user.save();
+
+    // Mark the order as paid
     cart.isPaid = true;
     await cart.save();
+
     res.status(200).json(cart);
-  }catch(e){
-    res.status(400).json({ msg: e.message });
-  }  
+  } catch (error) {
+    console.error('Error during checkout:', error);
+    res.status(400).json({ msg: error.message });
+  }
 }
 
 // Return the logged in user's paid order history

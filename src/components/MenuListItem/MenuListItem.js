@@ -5,7 +5,7 @@ export default function MenuListItem({ menuItem, handleAddToOrder }) {
   const [quantity, setQuantity] = useState(1); // start at 1 always
 
   const handleChange = (event) => {
-    const value = event.target.value; // postive values only 
+    const value = event.target.value;
     if (value === '' || (value > 0 && !isNaN(value) && value.indexOf('.') === -1)) {
       setQuantity(parseInt(value));
     }

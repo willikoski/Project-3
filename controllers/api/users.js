@@ -40,16 +40,57 @@ const dataController = {
   }
 }
 
+
 const apiController = {
   auth (req, res) {
     res.json(res.locals.data.token)
   }
 }
 
+
+const getUser = async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    // Extract and return user information, including balance
+    const { _id, name, email, balance } = user;
+    res.json({ _id, name, email, balance });
+  } catch (error) {
+    console.error('Error fetching user:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+const updateUserBalance = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const { newBalance } = req.body;
+
+    // Fetch the user from the database
+    const user = await User.findById(userId);
+
+    // Update the user's balance
+    user.balance = newBalance;
+    await user.save();
+
+    // Send a success response
+    res.status(200).json({ message: 'User balance updated successfully' });
+  } catch (error) {
+    // Handle errors
+    console.error('Error updating user balance:', error);
+    res.status(500).json({ error: 'An error occurred while updating user balance' });
+  }
+};
+
+
 module.exports = {
   checkToken,
   dataController,
-  apiController
+  apiController,
+  updateUserBalance,
+  getUser
 }
 
 /* -- Helper Functions -- */

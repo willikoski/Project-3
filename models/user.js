@@ -18,7 +18,8 @@ const userSchema = new Schema({
     trim: true,
     minlength: 3,
     required: true
-  }
+  },
+  balance: { type: Number, required: true, default: 10000 }
 }, {
   timestamps: true,
   toJSON: {

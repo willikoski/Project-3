@@ -7,10 +7,10 @@ export default function OrderDetail({ order, handleChangeQty, handleCheckout }) 
 
     const lineItems = order.lineItems.map(item => (
       <LineItem
-      lineItem={item}
-      isPaid={order.isPaid}
-      handleChangeQty={handleChangeQty}
-      key={item._id}
+        lineItem={item}
+        isPaid={order.isPaid}
+        handleChangeQty={handleChangeQty}
+        key={item._id}
       />
     ));
     return (

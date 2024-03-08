@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import * as itemsAPI from '../../utilities/items-api';
 import * as ordersAPI from '../../utilities/orders-api';
+import * as usersAPI from '../../utilities/users-api';
 import styles from './NewOrderPage.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../../components/Logo/Logo';
@@ -51,9 +52,19 @@ export default function NewOrderPage({ user, setUser }) {
 
   async function handleCheckout() {
     await ordersAPI.checkout();
+  
+    // Fetch updated user data
+    const updatedUserData = await usersAPI.getUser(user._id); // Assuming user._id contains the user ID
+    const newBalance = updatedUserData.balance;
+  
+    // Update user state
+    setUser({ ...user, balance: newBalance });
+  
+    // Navigate to orders page
     navigate('/orders');
   }
-
+  
+  
   return (
     <main className={styles.NewOrderPage}>
       <aside>
@@ -64,7 +75,7 @@ export default function NewOrderPage({ user, setUser }) {
           setActiveCat={setActiveCat}
         />
          <Link to="/orders" className={`${styles.link} button btn-sm`}>PREVIOUS ORDERS</Link> {/*Added Styling*/}
-        <UserLogOut user={user} setUser={setUser} />
+         <UserLogOut user={user} setUser={setUser} balance={user.balance} />
       </aside>
       <MenuList
         menuItems={menuItems.filter(item => item.category.name === activeCat)}

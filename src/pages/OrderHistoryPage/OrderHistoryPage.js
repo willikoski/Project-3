@@ -2,6 +2,7 @@ import styles from './OrderHistoryPage.module.scss';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as ordersAPI from '../../utilities/orders-api';
+import * as usersAPI from '../../utilities/users-api';
 import Logo from '../../components/Logo/Logo';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import OrderList from '../../components/OrderList/OrderList';
@@ -27,6 +28,15 @@ export default function OrderHistoryPage({ user, setUser }) {
   /*--- Event Handlers --- */
   function handleSelectOrder(order) {
     setActiveOrder(order);
+    updateBalanceAndUser();
+  }
+  
+  async function updateBalanceAndUser() {
+    const updatedUserData = await usersAPI.getUser(user._id); 
+    const newBalance = updatedUserData.balance;
+  
+    // Update user state
+    setUser({ ...user, balance: newBalance });
   }
 
   /*--- Rendered UI --- */
@@ -37,7 +47,7 @@ export default function OrderHistoryPage({ user, setUser }) {
         <Link to="/orders/new" className={`${styles.button} ${styles.btnSm} ${styles.link}`}>
           NEW ORDER
         </Link>
-        <UserLogOut user={user} setUser={setUser} />
+        <UserLogOut user={user} setUser={setUser} balance={user.balance} />
       </aside>
       <OrderList
         orders={orders}
