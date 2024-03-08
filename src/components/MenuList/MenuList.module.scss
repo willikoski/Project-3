@@ -1,7 +1,10 @@
 .MenuList {
     /*margin-top: 6rem;*/
-    background-color: lightgray;
+    background: linear-gradient(to bottom, rgba(211, 211, 211, 1) 0%, rgba(211, 211, 211, 0.5) 50%, rgba(211, 211, 211, 0) 100%);
     border: .4vmin solid black;
     border-radius: 2vmin;
     padding: 3vmin;
+    height: 80vh;
+    width: 75%;
     }
+

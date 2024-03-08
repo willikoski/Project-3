@@ -9,6 +9,7 @@ import MenuList from '../../components/MenuList/MenuList';
 import CategoryList from '../../components/CategoryList/CategoryList';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
+import CustomerSupport from '../../components/CustomerSupport/CustomerSupport';
 
 export default function NewOrderPage({ user, setUser }) {
   const [menuItems, setMenuItems] = useState([]);
@@ -75,6 +76,7 @@ export default function NewOrderPage({ user, setUser }) {
           setActiveCat={setActiveCat}
         />
          <Link to="/orders" className={`${styles.link} button btn-sm`}>PREVIOUS ORDERS</Link> {/*Added Styling*/}
+         <CustomerSupport/>
          <UserLogOut user={user} setUser={setUser} balance={user.balance} />
       </aside>
       <MenuList
@@ -86,6 +88,8 @@ export default function NewOrderPage({ user, setUser }) {
         handleChangeQty={handleChangeQty}
         handleCheckout={handleCheckout}
       />
+      
     </main>
+    
   );
 }

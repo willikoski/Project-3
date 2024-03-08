@@ -18,7 +18,9 @@ export default function UserLogOut({ user, setUser, balance }) {
     <div className={styles.UserLogOut}>
       <div>{user.name}</div>
       <div className={styles.email}>{user.email}</div>
-      {userBalance && <div>Balance: <span className={styles.limegreen}>$</span>{userBalance}</div>}
+      <div className={styles.balance}>
+        {userBalance && <div>Balance: <span className={styles.limegreen}>$</span>{userBalance.toFixed(2)}</div>}
+      </div>
       <button className="btn-sm" onClick={handleLogOut}>LOG OUT</button>
     </div>
   );

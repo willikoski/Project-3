@@ -7,6 +7,7 @@ import Logo from '../../components/Logo/Logo';
 import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import OrderList from '../../components/OrderList/OrderList';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
+import CustomerSupport from '../../components/CustomerSupport/CustomerSupport';
 
 export default function OrderHistoryPage({ user, setUser }) {
   /*--- State --- */
@@ -47,6 +48,7 @@ export default function OrderHistoryPage({ user, setUser }) {
         <Link to="/orders/new" className={`${styles.button} ${styles.btnSm} ${styles.link}`}>
           NEW ORDER
         </Link>
+        <CustomerSupport/>
         <UserLogOut user={user} setUser={setUser} balance={user.balance} />
       </aside>
       <OrderList

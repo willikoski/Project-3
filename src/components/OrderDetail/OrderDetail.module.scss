@@ -2,13 +2,14 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-left: 5vmin; /* Lets add spacing from the left covering our buttons */
     padding: 3vmin;
     font-size: 2vmin;
     color: var(--text-light);
     border: 5px solid black;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 80vh;
+    width: 80%;
   }
   
   .OrderDetail .sectionHeading {
