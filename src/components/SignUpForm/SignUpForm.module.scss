@@ -8,6 +8,7 @@
     font-size: 1.25rem;
     color: blue;
     margin-bottom: 5px;
+    font-weight: bolder;
   }
   
   .input {
@@ -19,9 +20,11 @@
     border: none;
     border-radius: 5px;
     outline: none;
+    background-image: linear-gradient(to top, rgba(255, 251, 251, 0.1), rgba(111, 100, 100, 0.5));
     &:hover {
       color: navy;
       font-weight: bolder;
+      background-image: none; 
   }
   }
   

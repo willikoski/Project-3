@@ -3,7 +3,6 @@ import styles from './CustomerSupport.module.scss';
 
 const CustomerSupportBubble = () => {
     const handleClick = () => {
-        // Open the YouTube link in a new tab when the bubble is clicked
         window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
     };
 

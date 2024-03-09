@@ -13,8 +13,19 @@ export default function MenuListItem({ menuItem, handleAddToOrder }) {
 
   return (
     <div className={styles.MenuListItem}>
-      <div className={`${styles.emoji} flex-ctr-ctr`}>{menuItem.emoji}</div>
-      <div className={styles.name}>{menuItem.name}</div>
+      <div className={`${styles.emoji} flex-ctr-ctr`}>
+      <img src={menuItem.emoji} alt={menuItem.emoji} className={styles.emojiImage} />
+      </div>
+      <div className={styles.name}>
+        <div>{menuItem.name}</div>
+        {menuItem.github && (
+          <div className={styles.githubLink}>
+            <a href={menuItem.github} target="_blank" rel="noopener noreferrer">
+              PortFolio
+            </a>
+          </div>
+        )}
+      </div>
       <div className={styles.buy}>
         <span>
           <span className={styles.limegreen}>$</span>

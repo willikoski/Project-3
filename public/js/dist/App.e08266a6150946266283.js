@@ -51,7 +51,6 @@ function CategoryList(_ref) {
 
 const CustomerSupportBubble = () => {
   const handleClick = () => {
-    // Open the YouTube link in a new tab when the bubble is clicked
     window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -93,7 +92,11 @@ function LineItem(_ref) {
     className: _LineItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].LineItem
   }, /*#__PURE__*/React.createElement("div", {
     className: "flex-ctr-ctr"
-  }, lineItem.item.emoji), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("img", {
+    src: lineItem.item.emoji,
+    alt: lineItem.item.emoji,
+    className: _LineItem_module_scss__WEBPACK_IMPORTED_MODULE_0__["default"].emojiImage
+  })), /*#__PURE__*/React.createElement("div", {
     className: "flex-ctr-ctr flex-col"
   }, /*#__PURE__*/React.createElement("span", {
     className: "align-ctr"
@@ -254,9 +257,19 @@ function MenuListItem(_ref) {
     className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].MenuListItem
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "".concat(_MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].emoji, " flex-ctr-ctr")
-  }, menuItem.emoji), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: menuItem.emoji,
+    alt: menuItem.emoji,
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].emojiImage
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].name
-  }, menuItem.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, menuItem.name), menuItem.github && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].githubLink
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+    href: menuItem.github,
+    target: "_blank",
+    rel: "noopener noreferrer"
+  }, "PortFolio"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].buy
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: _MenuListItem_module_scss__WEBPACK_IMPORTED_MODULE_1__["default"].limegreen
@@ -748,9 +761,7 @@ function NewOrderPage(_ref) {
   }
   async function handleCheckout() {
     await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_10__.checkout();
-
-    // Fetch updated user data
-    const updatedUserData = await _utilities_users_api__WEBPACK_IMPORTED_MODULE_11__.getUser(user._id); // Assuming user._id contains the user ID
+    const updatedUserData = await _utilities_users_api__WEBPACK_IMPORTED_MODULE_11__.getUser(user._id);
     const newBalance = updatedUserData.balance;
 
     // Update user state
@@ -1365,6 +1376,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.ZeRW57PNaWpYVsw6JlaC {
   color: limegreen !important;
 }
 
+.uChJPhQKvYd6xUQrKHnM {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
 .ZeRW57PNaWpYVsw6JlaC button {
   margin: 0;
   background-color: lightblue;
@@ -1396,13 +1413,14 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.ZeRW57PNaWpYVsw6JlaC {
   border: 2px solid black;
   border-radius: 4px;
   font-weight: bolder;
-}`, "",{"version":3,"sources":["webpack://./src/components/LineItem/LineItem.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,aAAA;EACA,gDAAA;EACA,gBAAA;EACA,wBAAA;EACA,8BAAA;EACA,sCAAA;EACA,iBAAA;EACA,mBAAA;AACJ;;AAEI;EACA,yCAAA;AACJ;;AAEI;EACA,aAAA;EACA,kCAAA;EACA,mBAAA;EACA,gBAAA;AACJ;;AAEI;EACA,aAAA;EACA,yBAAA;EACA,mBAAA;EACA,gBAAA;AACJ;;AAEI;EACA,SAAA;AACJ;;AAEI;EACI,mBAAA;EACA,2BAAA;AACR;;AAEI;EACI,SAAA;EACA,2BAAA;EACA,mBAAA;EACA,YAAA;EACA,qBAAA;EACA,sBAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,kBAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AACR;;AAEI;EACI,uBAAA;EACA,gBAAA;AACR;;AAEI;EACI,qBAAA;EACA,sBAAA;EACA,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,eAAA;EACA,uBAAA;EACA,kBAAA;EACA,mBAAA;AACR","sourcesContent":[".LineItem {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 3vw 15.35vw 5.75vw 5.25vw;\n    padding: 1vmin 0;\n    color: var(--text-light);\n    background-color: var(--white);\n    border-top: .1vmin solid var(--tan-3);\n    font-size: 1.15vw;\n    font-weight: bolder; \n    }\n    \n    .LineItem:last-child {\n    border-bottom: .1vmin solid var(--tan-3);\n    }\n    \n    .LineItem .qty {\n    display: flex;\n    /*justify-content: space-between;*/\n    align-items: center;\n    font-size: 1.3vw;\n    }\n    \n    .LineItem .extPrice {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    font-size: 1.3vw;\n    }\n    \n    .LineItem button {\n    margin: 0;\n    }\n\n    .limegreen{\n        font-weight: bolder;\n        color: limegreen !important;\n    }\n\n    .LineItem button {\n        margin: 0;\n        background-color: lightblue;\n        font-weight: bolder;\n        color: white;\n        padding-left: .25rem; \n        padding-right: .25rem;\n        font-size: 1.1vw; \n        cursor: pointer;\n        transition: background-color 0.3s ease;\n        border-radius: 4px;\n        border: 2px solid black;\n        border-radius: 4px;\n        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n      \n    .LineItem button:hover {\n        background-color: white;\n        color: lightblue;\n    }\n      \n    .quantityInput {\n        padding-left: .25rem; \n        padding-right: .25rem;\n        text-align: center;\n        font-size: 1.4vmin;\n        font-weight: bold;\n        max-width: 40px;\n        border: 2px solid black;\n        border-radius: 4px;\n        font-weight: bolder;\n      }"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/LineItem/LineItem.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,aAAA;EACA,gDAAA;EACA,gBAAA;EACA,wBAAA;EACA,8BAAA;EACA,sCAAA;EACA,iBAAA;EACA,mBAAA;AACJ;;AAEI;EACA,yCAAA;AACJ;;AAEI;EACA,aAAA;EACA,kCAAA;EACA,mBAAA;EACA,gBAAA;AACJ;;AAEI;EACA,aAAA;EACA,yBAAA;EACA,mBAAA;EACA,gBAAA;AACJ;;AAEI;EACA,SAAA;AACJ;;AAEI;EACI,mBAAA;EACA,2BAAA;AACR;;AAEI;EACI,WAAA;EACA,YAAA;EACA,kBAAA;AACR;;AAEI;EACI,SAAA;EACA,2BAAA;EACA,mBAAA;EACA,YAAA;EACA,qBAAA;EACA,sBAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,kBAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AACR;;AAEI;EACI,uBAAA;EACA,gBAAA;AACR;;AAEI;EACI,qBAAA;EACA,sBAAA;EACA,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,eAAA;EACA,uBAAA;EACA,kBAAA;EACA,mBAAA;AACR","sourcesContent":[".LineItem {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 3vw 15.35vw 5.75vw 5.25vw;\n    padding: 1vmin 0;\n    color: var(--text-light);\n    background-color: var(--white);\n    border-top: .1vmin solid var(--tan-3);\n    font-size: 1.15vw;\n    font-weight: bolder; \n    }\n    \n    .LineItem:last-child {\n    border-bottom: .1vmin solid var(--tan-3);\n    }\n    \n    .LineItem .qty {\n    display: flex;\n    /*justify-content: space-between;*/\n    align-items: center;\n    font-size: 1.3vw;\n    }\n    \n    .LineItem .extPrice {\n    display: flex;\n    justify-content: flex-end;\n    align-items: center;\n    font-size: 1.3vw;\n    }\n    \n    .LineItem button {\n    margin: 0;\n    }\n\n    .limegreen{\n        font-weight: bolder;\n        color: limegreen !important;\n    }\n\n    .emojiImage {\n        width: 50px; \n        height: 50px; \n        border-radius: 50%;\n      }\n\n    .LineItem button {\n        margin: 0;\n        background-color: lightblue;\n        font-weight: bolder;\n        color: white;\n        padding-left: .25rem; \n        padding-right: .25rem;\n        font-size: 1.1vw; \n        cursor: pointer;\n        transition: background-color 0.3s ease;\n        border-radius: 4px;\n        border: 2px solid black;\n        border-radius: 4px;\n        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    }\n      \n    .LineItem button:hover {\n        background-color: white;\n        color: lightblue;\n    }\n      \n    .quantityInput {\n        padding-left: .25rem; \n        padding-right: .25rem;\n        text-align: center;\n        font-size: 1.4vmin;\n        font-weight: bold;\n        max-width: 40px;\n        border: 2px solid black;\n        border-radius: 4px;\n        font-weight: bolder;\n      }"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"LineItem": `ZeRW57PNaWpYVsw6JlaC`,
 	"qty": `Z_MQzAiRjTlxboCrh9om`,
 	"extPrice": `iZ6oJDRJlBAjRnxPhUy5`,
 	"limegreen": `FAifOxxG3ZvxK1RxGqn3`,
+	"emojiImage": `uChJPhQKvYd6xUQrKHnM`,
 	"quantityInput": `Y4FWReu8jPnZglvYzTQ8`
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
@@ -1439,6 +1457,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.XPsX6g9srqbkkTBN23k7 {
   font-size: 1.25rem;
   color: blue;
   margin-bottom: 5px;
+  font-weight: bolder;
 }
 
 .vJNEbBnJ_iJ432RxUKVx {
@@ -1449,11 +1468,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.XPsX6g9srqbkkTBN23k7 {
   font-size: 1rem;
   border: none;
   border-radius: 5px;
+  background-image: linear-gradient(to top, rgba(255, 251, 251, 0.1), rgba(111, 100, 100, 0.5));
   outline: none;
 }
 .vJNEbBnJ_iJ432RxUKVx:hover {
   color: navy;
   font-weight: bolder;
+  background-image: none;
 }
 
 .rZuZOqn3rAUwtdEnyMpa {
@@ -1475,7 +1496,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.XPsX6g9srqbkkTBN23k7 {
 .OB6wDumfTTpvUFiHe1R3 {
   font-size: 0.85rem;
   color: red;
-}`, "",{"version":3,"sources":["webpack://./src/components/LoginForm/LoginForm.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,gBAAA;EACA,cAAA;EACA,kBAAA;AACJ;;AAEE;EACE,kBAAA;EACA,WAAA;EACA,kBAAA;AACJ;;AAEE;EACE,UAAA;EACA,YAAA;EACA,mBAAA;EACA,eAAA;EACA,eAAA;EACA,YAAA;EACA,kBAAA;EACA,aAAA;AACJ;AAAI;EACI,WAAA;EACA,mBAAA;AAER;;AAEE;EACE,WAAA;EACA,YAAA;EACA,kBAAA;EACA,sBAAA;EACA,YAAA;EACA,eAAA;EACA,iBAAA;EACA,YAAA;EACA,eAAA;EACA,sCAAA;AACJ;AACI;EACE,0BAAA;AACN;;AAGE;EACE,kBAAA;EACA,UAAA;AAAJ","sourcesContent":[".formContainer {\r\n    width: auto;\r\n    max-width: 400px; \r\n    margin: 0 auto;\r\n    text-align: center;\r\n  }\r\n  \r\n  .label {\r\n    font-size: 1.25rem;\r\n    color: blue;\r\n    margin-bottom: 5px;\r\n  }\r\n  \r\n  .input {\r\n    width: 95%;\r\n    height: 40px;\r\n    margin-bottom: 15px;\r\n    padding: 0 10px;\r\n    font-size: 1rem;\r\n    border: none;\r\n    border-radius: 5px;\r\n    outline: none;\r\n    &:hover {\r\n        color: navy;\r\n        font-weight: bolder;\r\n    }\r\n  }\r\n  \r\n  .button {\r\n    width: 100%;\r\n    height: 50px;\r\n    border-radius: 5px;\r\n    background-color: blue;\r\n    color: white;\r\n    font-size: 1rem;\r\n    font-weight: bold;\r\n    border: none;\r\n    cursor: pointer;\r\n    transition: background-color 0.3s ease;\r\n  \r\n    &:hover {\r\n      background-color: darkblue;\r\n    }\r\n  }\r\n  \r\n  .errorMessage {\r\n    font-size: 0.85rem;\r\n    color: red;\r\n  }"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/LoginForm/LoginForm.module.scss"],"names":[],"mappings":"AAAA;EACI,WAAA;EACA,gBAAA;EACA,cAAA;EACA,kBAAA;AACJ;;AAEE;EACE,kBAAA;EACA,WAAA;EACA,kBAAA;EACA,mBAAA;AACJ;;AAEE;EACE,UAAA;EACA,YAAA;EACA,mBAAA;EACA,eAAA;EACA,eAAA;EACA,YAAA;EACA,kBAAA;EACA,6FAAA;EACA,aAAA;AACJ;AAAI;EACI,WAAA;EACA,mBAAA;EACA,sBAAA;AAER;;AAEE;EACE,WAAA;EACA,YAAA;EACA,kBAAA;EACA,sBAAA;EACA,YAAA;EACA,eAAA;EACA,iBAAA;EACA,YAAA;EACA,eAAA;EACA,sCAAA;AACJ;AACI;EACE,0BAAA;AACN;;AAGE;EACE,kBAAA;EACA,UAAA;AAAJ","sourcesContent":[".formContainer {\r\n    width: auto;\r\n    max-width: 400px; \r\n    margin: 0 auto;\r\n    text-align: center;\r\n  }\r\n  \r\n  .label {\r\n    font-size: 1.25rem;\r\n    color: blue;\r\n    margin-bottom: 5px;\r\n    font-weight: bolder;\r\n  }\r\n  \r\n  .input {\r\n    width: 95%;\r\n    height: 40px;\r\n    margin-bottom: 15px;\r\n    padding: 0 10px;\r\n    font-size: 1rem;\r\n    border: none;\r\n    border-radius: 5px;\r\n    background-image: linear-gradient(to top, rgba(255, 251, 251, 0.1), rgba(111, 100, 100, 0.5));\r\n    outline: none;\r\n    &:hover {\r\n        color: navy;\r\n        font-weight: bolder;\r\n        background-image: none; \r\n    }\r\n  }\r\n  \r\n  .button {\r\n    width: 100%;\r\n    height: 50px;\r\n    border-radius: 5px;\r\n    background-color: blue;\r\n    color: white;\r\n    font-size: 1rem;\r\n    font-weight: bold;\r\n    border: none;\r\n    cursor: pointer;\r\n    transition: background-color 0.3s ease;\r\n  \r\n    &:hover {\r\n      background-color: darkblue;\r\n    }\r\n  }\r\n  \r\n  .errorMessage {\r\n    font-size: 0.85rem;\r\n    color: red;\r\n  }"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"formContainer": `XPsX6g9srqbkkTBN23k7`,
@@ -1588,6 +1609,18 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.X4tFBfG4MKknHvd01CKE {
   border-bottom: 4px solid black;
   border-radius: 2px;
 }
+.X4tFBfG4MKknHvd01CKE .btaPZIAR3UXcmY6H1IS8 {
+  margin-top: 5px;
+  font-size: 20px;
+  color: #007bff;
+}
+.X4tFBfG4MKknHvd01CKE .btaPZIAR3UXcmY6H1IS8 a {
+  text-decoration: none;
+  color: inherit;
+}
+.X4tFBfG4MKknHvd01CKE .btaPZIAR3UXcmY6H1IS8 a:hover {
+  text-decoration: underline;
+}
 
 .X4tFBfG4MKknHvd01CKE .GqkE12RHPdZZg1360W4p {
   width: 2vw;
@@ -1595,6 +1628,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.X4tFBfG4MKknHvd01CKE {
   background-color: var(--tan-1);
   border: 0.1vmin solid var(--tan-3);
   border-radius: 1vmin;
+}
+
+.RCCoL0DisKnEcrYY1kIn {
+  width: 4vw;
+  height: 4vw;
+  border-radius: 50%;
 }
 
 .X4tFBfG4MKknHvd01CKE .fO9kiPygtr0vmzsXoUxA {
@@ -1673,11 +1712,13 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.X4tFBfG4MKknHvd01CKE {
 .tGKW_CCkzeJ2zxiz2cql:hover {
   background-color: white;
   color: lightblue;
-}`, "",{"version":3,"sources":["webpack://./src/components/MenuListItem/MenuListItem.module.scss"],"names":[],"mappings":"AAAA;EACI,UAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,gBAAA;EACA,wBAAA;EACA,8BAAA;EACA,kCAAA;EACA,8BAAA;EACA,kBAAA;AACJ;;AAEE;EACE,UAAA;EACA,gBAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;AACJ;;AAEE;EACE,aAAA;EACA,gBAAA;EACA,sBAAA;EACA,qBAAA;AACJ;;AAEE;EACE,gBAAA;EACA,gBAAA;EACA,kBAAA;EACA,wBAAA;AACJ;;AAEE;EACE,gBAAA;EACA,kBAAA;EACA,wBAAA;AACJ;;AAEE;EACE,2BAAA;EACA,YAAA;EACA,sBAAA;EACA,mBAAA;EACA,WAAA;EACA,YAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AACJ;AACI;EACE,uBAAA;EACA,gBAAA;AACN;;AAGE;EACE,mBAAA;EACA,2BAAA;AAAJ;;AAGE;EACE,wBAAA;EACA,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,iBAAA;EACA,kBAAA;EACA,eAAA;EACA,uBAAA;EACA,kBAAA;EACA,qBAAA;EACA,mBAAA;AAAJ;;AAGE;EACE,SAAA;EACA,2BAAA;EACA,mBAAA;EACA,YAAA;EACA,wBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,kBAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AAAJ;AAEI;EACE,uBAAA;EACA,gBAAA;AAAN","sourcesContent":[".MenuListItem {\n    width: 90%;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: .3vmin;\n    color: var(--text-light);\n    background-color: var(--white);\n    border: .1vmin solid var(--tan-3);\n    border-bottom: 4px solid black;\n    border-radius: 2px;\n  }\n  \n  .MenuListItem .emoji {\n    width: 2vw;\n    font-size: 2.5vw;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n  }\n  \n  .MenuListItem .buy {\n    display: flex;\n    max-width: 166px;\n    flex-direction: column;\n    margin-bottom: .1rem;\n  }\n  \n  .MenuListItem .buy span {\n    font-size: 1.3vw;\n    margin-bottom: 0;\n    text-align: center;\n    color: var(--text-light);\n  }\n  \n  .MenuListItem .name {\n    font-size: 1.5vw;\n    text-align: center;\n    color: var(--text-light);\n  }\n\n  .btnSm {\n    background-color: lightblue;\n    color: white;\n    padding: 0.6vmin 1vmin;\n    font-size: 1.15vmin;\n    width: auto;\n    height: auto; \n    min-width: 90px; \n    min-height: 30px; \n    cursor: pointer;\n    transition: background-color 0.3s ease;\n    border: 2px solid black;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n\n    &:hover {\n      background-color: white;\n      color: lightblue;\n    }\n  }\n  \n  .limegreen{\n    font-weight: bolder;\n    color: limegreen !important;\n  }\n\n  .quantityInput {\n    padding: 0.5vmin .6vmin;\n    text-align: center;\n    font-size: 1.4vmin;\n    font-weight: bold;\n    margin-left: auto;\n    margin-right: auto;\n    max-width: 50px;\n    border: 2px solid black;\n    border-radius: 4px;\n    margin-bottom: .1rem;\n    font-weight: bolder;\n  }\n\n  .quantityButton {\n    margin: 0;\n    background-color: lightblue;\n    font-weight: bolder;\n    color: white;\n    padding: 0.5vmin .6vmin;\n    font-size: 1.4vmin;\n    cursor: pointer;\n    transition: background-color 0.3s ease;\n    border-radius: 4px;\n    border: 2px solid black;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n\n    &:hover {\n      background-color: white;\n      color: lightblue;\n    }\n}\n  "],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/MenuListItem/MenuListItem.module.scss"],"names":[],"mappings":"AAAA;EACI,UAAA;EACA,aAAA;EACA,8BAAA;EACA,mBAAA;EACA,gBAAA;EACA,wBAAA;EACA,8BAAA;EACA,kCAAA;EACA,8BAAA;EACA,kBAAA;AACJ;AACI;EACE,eAAA;EACA,eAAA;EACA,cAAA;AACN;AAEI;EACE,qBAAA;EACA,cAAA;AAAN;AAGI;EACE,0BAAA;AADN;;AAKE;EACE,UAAA;EACA,gBAAA;EACA,8BAAA;EACA,kCAAA;EACA,oBAAA;AAFJ;;AAKE;EACE,UAAA;EACA,WAAA;EACA,kBAAA;AAFJ;;AAKE;EACE,aAAA;EACA,gBAAA;EACA,sBAAA;EACA,qBAAA;AAFJ;;AAKE;EACE,gBAAA;EACA,gBAAA;EACA,kBAAA;EACA,wBAAA;AAFJ;;AAKE;EACE,gBAAA;EACA,kBAAA;EACA,wBAAA;AAFJ;;AAKE;EACE,2BAAA;EACA,YAAA;EACA,sBAAA;EACA,mBAAA;EACA,WAAA;EACA,YAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AAFJ;AAII;EACE,uBAAA;EACA,gBAAA;AAFN;;AAME;EACE,mBAAA;EACA,2BAAA;AAHJ;;AAME;EACE,wBAAA;EACA,kBAAA;EACA,kBAAA;EACA,iBAAA;EACA,iBAAA;EACA,kBAAA;EACA,eAAA;EACA,uBAAA;EACA,kBAAA;EACA,qBAAA;EACA,mBAAA;AAHJ;;AAME;EACE,SAAA;EACA,2BAAA;EACA,mBAAA;EACA,YAAA;EACA,wBAAA;EACA,kBAAA;EACA,eAAA;EACA,sCAAA;EACA,kBAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;AAHJ;AAKI;EACE,uBAAA;EACA,gBAAA;AAHN","sourcesContent":[".MenuListItem {\n    width: 90%;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    padding: .3vmin;\n    color: var(--text-light);\n    background-color: var(--white);\n    border: .1vmin solid var(--tan-3);\n    border-bottom: 4px solid black;\n    border-radius: 2px;\n\n    .githubLink {\n      margin-top: 5px;\n      font-size: 20px;\n      color: #007bff;\n    }\n  \n    .githubLink a {\n      text-decoration: none;\n      color: inherit;\n    }\n  \n    .githubLink a:hover {\n      text-decoration: underline;\n    }\n  }\n  \n  .MenuListItem .emoji {\n    width: 2vw;\n    font-size: 2.5vw;\n    background-color: var(--tan-1);\n    border: .1vmin solid var(--tan-3);\n    border-radius: 1vmin;\n  }\n\n  .emojiImage {\n    width: 4vw; \n    height: 4vw; \n    border-radius: 50%;\n  }\n  \n  .MenuListItem .buy {\n    display: flex;\n    max-width: 166px;\n    flex-direction: column;\n    margin-bottom: .1rem;\n  }\n  \n  .MenuListItem .buy span {\n    font-size: 1.3vw;\n    margin-bottom: 0;\n    text-align: center;\n    color: var(--text-light);\n  }\n  \n  .MenuListItem .name {\n    font-size: 1.5vw;\n    text-align: center;\n    color: var(--text-light);\n  }\n\n  .btnSm {\n    background-color: lightblue;\n    color: white;\n    padding: 0.6vmin 1vmin;\n    font-size: 1.15vmin;\n    width: auto;\n    height: auto; \n    min-width: 90px; \n    min-height: 30px; \n    cursor: pointer;\n    transition: background-color 0.3s ease;\n    border: 2px solid black;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n\n    &:hover {\n      background-color: white;\n      color: lightblue;\n    }\n  }\n  \n  .limegreen{\n    font-weight: bolder;\n    color: limegreen !important;\n  }\n\n  .quantityInput {\n    padding: 0.5vmin .6vmin;\n    text-align: center;\n    font-size: 1.4vmin;\n    font-weight: bold;\n    margin-left: auto;\n    margin-right: auto;\n    max-width: 50px;\n    border: 2px solid black;\n    border-radius: 4px;\n    margin-bottom: .1rem;\n    font-weight: bolder;\n  }\n\n  .quantityButton {\n    margin: 0;\n    background-color: lightblue;\n    font-weight: bolder;\n    color: white;\n    padding: 0.5vmin .6vmin;\n    font-size: 1.4vmin;\n    cursor: pointer;\n    transition: background-color 0.3s ease;\n    border-radius: 4px;\n    border: 2px solid black;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n\n    &:hover {\n      background-color: white;\n      color: lightblue;\n    }\n}\n  "],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"MenuListItem": `X4tFBfG4MKknHvd01CKE`,
+	"githubLink": `btaPZIAR3UXcmY6H1IS8`,
 	"emoji": `GqkE12RHPdZZg1360W4p`,
+	"emojiImage": `RCCoL0DisKnEcrYY1kIn`,
 	"buy": `fO9kiPygtr0vmzsXoUxA`,
 	"name": `VR1OCl60qOXrRx1IzVEa`,
 	"btnSm": `f7X_MS6ZkwPF9YBm6IUH`,
@@ -1716,7 +1757,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.eBz5FvD9TgyIgfFi1MdG {
   padding: 3vmin;
   height: 80vh;
   width: 75%;
-}`, "",{"version":3,"sources":["webpack://./src/components/MenuList/MenuList.module.scss"],"names":[],"mappings":"AAAA;EACI,oBAAA;EACA,wHAAA;EACA,2BAAA;EACA,oBAAA;EACA,cAAA;EACA,YAAA;EACA,UAAA;AACJ","sourcesContent":[".MenuList {\n    /*margin-top: 6rem;*/\n    background: linear-gradient(to bottom, rgba(211, 211, 211, 1) 0%, rgba(211, 211, 211, 0.5) 50%, rgba(211, 211, 211, 0) 100%);\n    border: .4vmin solid black;\n    border-radius: 2vmin;\n    padding: 3vmin;\n    height: 80vh;\n    width: 75%;\n    }\n\n"],"sourceRoot":""}]);
+  overflow-y: scroll;
+  padding-right: 13px;
+}
+
+/* Custom scrollbar */
+.eBz5FvD9TgyIgfFi1MdG::-webkit-scrollbar {
+  margin-right: 1rem;
+  width: 10px;
+}
+
+.eBz5FvD9TgyIgfFi1MdG::-webkit-scrollbar-track {
+  background: rgba(245, 245, 245, 0);
+  border-radius: 5px;
+}
+
+.eBz5FvD9TgyIgfFi1MdG::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.eBz5FvD9TgyIgfFi1MdG::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}`, "",{"version":3,"sources":["webpack://./src/components/MenuList/MenuList.module.scss"],"names":[],"mappings":"AAAA;EACI,oBAAA;EACA,wHAAA;EACA,2BAAA;EACA,oBAAA;EACA,cAAA;EACA,YAAA;EACA,UAAA;EACA,kBAAA;EACA,mBAAA;AACJ;;AAEM,qBAAA;AACA;EACE,kBAAA;EACA,WAAA;AACR;;AAEM;EACE,kCAAA;EACA,kBAAA;AACR;;AAEM;EACE,gBAAA;EACA,kBAAA;EACA,eAAA;AACR;;AAEM;EACE,gBAAA;AACR","sourcesContent":[".MenuList {\n    /*margin-top: 6rem;*/\n    background: linear-gradient(to bottom, rgba(211, 211, 211, 1) 0%, rgba(211, 211, 211, 0.5) 50%, rgba(211, 211, 211, 0) 100%);\n    border: .4vmin solid black;\n    border-radius: 2vmin;\n    padding: 3vmin;\n    height: 80vh;\n    width: 75%;\n    overflow-y: scroll;\n    padding-right: 13px;\n    }\n\n      /* Custom scrollbar */\n      .MenuList::-webkit-scrollbar {\n        margin-right: 1rem;\n        width: 10px;\n      }\n      \n      .MenuList::-webkit-scrollbar-track {\n        background: rgba(245, 245, 245, 0); \n        border-radius: 5px;\n      }\n      \n      .MenuList::-webkit-scrollbar-thumb {\n        background: #888; \n        border-radius: 5px; \n        cursor: pointer;\n      }\n      \n      .MenuList::-webkit-scrollbar-thumb:hover {\n        background: #555; \n      }"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"MenuList": `eBz5FvD9TgyIgfFi1MdG`
@@ -1773,6 +1837,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.cPR75kdAXDGVxib0PszB {
   justify-content: flex-start;
   height: calc(100vh - 18vmin);
   width: 100%;
+  text-align: center;
 }
 
 .cPR75kdAXDGVxib0PszB .V5OAbv7QFHo6WglNx0m0 {
@@ -1827,7 +1892,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.cPR75kdAXDGVxib0PszB {
 .Jc3gfnsfDiBbj9OXQhF1 {
   font-weight: bolder;
   color: limegreen !important;
-}`, "",{"version":3,"sources":["webpack://./src/components/OrderDetail/OrderDetail.module.scss"],"names":[],"mappings":"AAAA;EACI,sBAAA;EACA,2BAAA;EACA,mBAAA;EACA,cAAA;EACA,gBAAA;EACA,wBAAA;EACA,uBAAA;EACA,mBAAA;EACA,wCAAA;EACA,YAAA;EACA,UAAA;AACJ;;AAEE;EACE,WAAA;EACA,8BAAA;EACA,kBAAA;AACJ;AACI;EACE,gBAAA;EACA,mBAAA;AACN;;AAGE;EACE,iBAAA;EACA,2BAAA;EACA,4BAAA;EACA,WAAA;AAAJ;;AAGE;EACE,WAAA;EACA,aAAA;EACA,4CAAA;EACA,gBAAA;EACA,wBAAA;EACA,sCAAA;AAAJ;;AAGE;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,gBAAA;EACA,uBAAA;AAAJ;;AAGE;EACE,aAAA;EACA,yBAAA;AAAJ;;AAGE;EACE,kBAAA;EACA,SAAA;EACA,gBAAA;AAAJ;;AAGE;EACE,2BAAA;EACA,YAAA;EACA,sBAAA;EACA,mBAAA;EACA,WAAA;EACA,YAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;EACA,mBAAA;AAAJ;AAEI;EACE,uBAAA;EACA,gBAAA;AAAN;;AAIE;EACE,mBAAA;EACA,2BAAA;AADJ","sourcesContent":[".OrderDetail {\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n    padding: 3vmin;\n    font-size: 2vmin;\n    color: var(--text-light);\n    border: 5px solid black;\n    border-radius: 10px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    height: 80vh;\n    width: 80%;\n  }\n  \n  .OrderDetail .sectionHeading {\n    width: 100%;\n    border-bottom: 5px solid black;\n    border-radius: 3px;\n\n    .orderDate {\n      color: lightblue;\n      font-weight: bolder;\n    }\n  }\n  \n  .OrderDetail .lineItemContainer {\n    margin-top: 3vmin;\n    justify-content: flex-start;\n    height: calc(100vh - 18vmin);\n    width: 100%;\n  }\n  \n  .OrderDetail .total {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 18.35vw 5.75vw 5.25vw;\n    padding: 1vmin 0;\n    color: var(--text-light);\n    border-top: .1vmin solid var(--tan-3);\n  }\n  \n  .OrderDetail .total span {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 1.5vw;\n    color: var(--text-dark);\n  }\n  \n  .OrderDetail .total span.right {\n    display: flex;\n    justify-content: flex-end;\n  }\n  \n  .OrderDetail .hungry {\n    position: absolute;\n    top: 50vh;\n    font-size: 2vmin;\n  }\n\n  .btnSm {\n    background-color: lightblue;\n    color: white;\n    padding: 0.6vmin 1vmin;\n    font-size: 1.15vmin;\n    width: auto;\n    height: auto; \n    min-width: 90px; \n    min-height: 30px; \n    cursor: pointer;\n    transition: background-color 0.3s ease;\n    border: 2px solid black;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    font-weight: bolder;\n\n    &:hover {\n      background-color: white;\n      color: lightblue;\n    }\n  }\n\n  .limegreen{\n    font-weight: bolder;\n    color: limegreen !important;\n  }\n  "],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/OrderDetail/OrderDetail.module.scss"],"names":[],"mappings":"AAAA;EACI,sBAAA;EACA,2BAAA;EACA,mBAAA;EACA,cAAA;EACA,gBAAA;EACA,wBAAA;EACA,uBAAA;EACA,mBAAA;EACA,wCAAA;EACA,YAAA;EACA,UAAA;AACJ;;AAEE;EACE,WAAA;EACA,8BAAA;EACA,kBAAA;AACJ;AACI;EACE,gBAAA;EACA,mBAAA;AACN;;AAGE;EACE,iBAAA;EACA,2BAAA;EACA,4BAAA;EACA,WAAA;EACA,kBAAA;AAAJ;;AAGE;EACE,WAAA;EACA,aAAA;EACA,4CAAA;EACA,gBAAA;EACA,wBAAA;EACA,sCAAA;AAAJ;;AAGE;EACE,aAAA;EACA,uBAAA;EACA,mBAAA;EACA,gBAAA;EACA,uBAAA;AAAJ;;AAGE;EACE,aAAA;EACA,yBAAA;AAAJ;;AAGE;EACE,kBAAA;EACA,SAAA;EACA,gBAAA;AAAJ;;AAGE;EACE,2BAAA;EACA,YAAA;EACA,sBAAA;EACA,mBAAA;EACA,WAAA;EACA,YAAA;EACA,eAAA;EACA,gBAAA;EACA,eAAA;EACA,sCAAA;EACA,uBAAA;EACA,kBAAA;EACA,wCAAA;EACA,mBAAA;AAAJ;AAEI;EACE,uBAAA;EACA,gBAAA;AAAN;;AAIE;EACE,mBAAA;EACA,2BAAA;AADJ","sourcesContent":[".OrderDetail {\n    flex-direction: column;\n    justify-content: flex-start;\n    align-items: center;\n    padding: 3vmin;\n    font-size: 2vmin;\n    color: var(--text-light);\n    border: 5px solid black;\n    border-radius: 10px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    height: 80vh;\n    width: 80%;\n  }\n  \n  .OrderDetail .sectionHeading {\n    width: 100%;\n    border-bottom: 5px solid black;\n    border-radius: 3px;\n\n    .orderDate {\n      color: lightblue;\n      font-weight: bolder;\n    }\n  }\n  \n  .OrderDetail .lineItemContainer {\n    margin-top: 3vmin;\n    justify-content: flex-start;\n    height: calc(100vh - 18vmin);\n    width: 100%;\n    text-align: center;\n  }\n  \n  .OrderDetail .total {\n    width: 100%;\n    display: grid;\n    grid-template-columns: 18.35vw 5.75vw 5.25vw;\n    padding: 1vmin 0;\n    color: var(--text-light);\n    border-top: .1vmin solid var(--tan-3);\n  }\n  \n  .OrderDetail .total span {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    font-size: 1.5vw;\n    color: var(--text-dark);\n  }\n  \n  .OrderDetail .total span.right {\n    display: flex;\n    justify-content: flex-end;\n  }\n  \n  .OrderDetail .hungry {\n    position: absolute;\n    top: 50vh;\n    font-size: 2vmin;\n  }\n\n  .btnSm {\n    background-color: lightblue;\n    color: white;\n    padding: 0.6vmin 1vmin;\n    font-size: 1.15vmin;\n    width: auto;\n    height: auto; \n    min-width: 90px; \n    min-height: 30px; \n    cursor: pointer;\n    transition: background-color 0.3s ease;\n    border: 2px solid black;\n    border-radius: 4px;\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n    font-weight: bolder;\n\n    &:hover {\n      background-color: white;\n      color: lightblue;\n    }\n  }\n\n  .limegreen{\n    font-weight: bolder;\n    color: limegreen !important;\n  }\n  "],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"OrderDetail": `cPR75kdAXDGVxib0PszB`,
@@ -2002,6 +2067,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.dE7QB7TYmr991SNkuxKb {
   font-size: 1.25rem;
   color: blue;
   margin-bottom: 5px;
+  font-weight: bolder;
 }
 
 .z8ybQdgVv2RK52kCD4yt {
@@ -2013,10 +2079,12 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.dE7QB7TYmr991SNkuxKb {
   border: none;
   border-radius: 5px;
   outline: none;
+  background-image: linear-gradient(to top, rgba(255, 251, 251, 0.1), rgba(111, 100, 100, 0.5));
 }
 .z8ybQdgVv2RK52kCD4yt:hover {
   color: navy;
   font-weight: bolder;
+  background-image: none;
 }
 
 .xyMV8WMo_VF047TUcQck {
@@ -2038,7 +2106,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.dE7QB7TYmr991SNkuxKb {
 .TAyOqe_pD6NGITZiAyFV {
   font-size: 0.85rem;
   color: red;
-}`, "",{"version":3,"sources":["webpack://./src/components/SignUpForm/SignUpForm.module.scss"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,cAAA;EACA,kBAAA;AACJ;;AAEE;EACE,kBAAA;EACA,WAAA;EACA,kBAAA;AACJ;;AAEE;EACE,UAAA;EACA,YAAA;EACA,mBAAA;EACA,eAAA;EACA,eAAA;EACA,YAAA;EACA,kBAAA;EACA,aAAA;AACJ;AAAI;EACE,WAAA;EACA,mBAAA;AAEN;;AAEE;EACE,WAAA;EACA,YAAA;EACA,kBAAA;EACA,sBAAA;EACA,YAAA;EACA,eAAA;EACA,iBAAA;EACA,YAAA;EACA,eAAA;EACA,sCAAA;AACJ;AACI;EACE,0BAAA;AACN;;AAGE;EACE,kBAAA;EACA,UAAA;AAAJ","sourcesContent":[".formContainer {\r\n    max-width: 400px; \r\n    margin: 0 auto;\r\n    text-align: center;\r\n  }\r\n  \r\n  .label {\r\n    font-size: 1.25rem;\r\n    color: blue;\r\n    margin-bottom: 5px;\r\n  }\r\n  \r\n  .input {\r\n    width: 95%;\r\n    height: 40px;\r\n    margin-bottom: 15px;\r\n    padding: 0 10px;\r\n    font-size: 1rem;\r\n    border: none;\r\n    border-radius: 5px;\r\n    outline: none;\r\n    &:hover {\r\n      color: navy;\r\n      font-weight: bolder;\r\n  }\r\n  }\r\n  \r\n  .button {\r\n    width: 100%;\r\n    height: 50px;\r\n    border-radius: 5px;\r\n    background-color: blue;\r\n    color: white;\r\n    font-size: 1rem;\r\n    font-weight: bold;\r\n    border: none;\r\n    cursor: pointer;\r\n    transition: background-color 0.3s ease;\r\n  \r\n    &:hover {\r\n      background-color: darkblue;\r\n    }\r\n  }\r\n  \r\n  .errorMessage {\r\n    font-size: 0.85rem;\r\n    color: red;\r\n  }\r\n  "],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/components/SignUpForm/SignUpForm.module.scss"],"names":[],"mappings":"AAAA;EACI,gBAAA;EACA,cAAA;EACA,kBAAA;AACJ;;AAEE;EACE,kBAAA;EACA,WAAA;EACA,kBAAA;EACA,mBAAA;AACJ;;AAEE;EACE,UAAA;EACA,YAAA;EACA,mBAAA;EACA,eAAA;EACA,eAAA;EACA,YAAA;EACA,kBAAA;EACA,aAAA;EACA,6FAAA;AACJ;AAAI;EACE,WAAA;EACA,mBAAA;EACA,sBAAA;AAEN;;AAEE;EACE,WAAA;EACA,YAAA;EACA,kBAAA;EACA,sBAAA;EACA,YAAA;EACA,eAAA;EACA,iBAAA;EACA,YAAA;EACA,eAAA;EACA,sCAAA;AACJ;AACI;EACE,0BAAA;AACN;;AAGE;EACE,kBAAA;EACA,UAAA;AAAJ","sourcesContent":[".formContainer {\r\n    max-width: 400px; \r\n    margin: 0 auto;\r\n    text-align: center;\r\n  }\r\n  \r\n  .label {\r\n    font-size: 1.25rem;\r\n    color: blue;\r\n    margin-bottom: 5px;\r\n    font-weight: bolder;\r\n  }\r\n  \r\n  .input {\r\n    width: 95%;\r\n    height: 40px;\r\n    margin-bottom: 15px;\r\n    padding: 0 10px;\r\n    font-size: 1rem;\r\n    border: none;\r\n    border-radius: 5px;\r\n    outline: none;\r\n    background-image: linear-gradient(to top, rgba(255, 251, 251, 0.1), rgba(111, 100, 100, 0.5));\r\n    &:hover {\r\n      color: navy;\r\n      font-weight: bolder;\r\n      background-image: none; \r\n  }\r\n  }\r\n  \r\n  .button {\r\n    width: 100%;\r\n    height: 50px;\r\n    border-radius: 5px;\r\n    background-color: blue;\r\n    color: white;\r\n    font-size: 1rem;\r\n    font-weight: bold;\r\n    border: none;\r\n    cursor: pointer;\r\n    transition: background-color 0.3s ease;\r\n  \r\n    &:hover {\r\n      background-color: darkblue;\r\n    }\r\n  }\r\n  \r\n  .errorMessage {\r\n    font-size: 0.85rem;\r\n    color: red;\r\n  }\r\n  "],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"formContainer": `dE7QB7TYmr991SNkuxKb`,
@@ -2137,13 +2205,16 @@ ___CSS_LOADER_EXPORT___.locals = {
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.RygkJgZmBHTETlLP3C3i {
+___CSS_LOADER_EXPORT___.push([module.id, `html {
+  background-image: linear-gradient(to top, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.5));
+}
+
+.RygkJgZmBHTETlLP3C3i {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #f0f0f0;
 }
 
 .CK5eNrxOxrUlH8arKKKJ {
@@ -2163,12 +2234,14 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.RygkJgZmBHTETlLP3C3i {
   width: 95%;
   height: 40px;
   border: 1px solid #ccc;
+  background-image: linear-gradient(to top, rgba(255, 251, 251, 0.1), rgba(111, 100, 100, 0.5));
   border-radius: 5px;
   padding: 0 10px;
   margin-bottom: 15px;
 }
 .azFj89TCmf5LYhmBdfii .fk9yi2gyHFABnQS6wqZr:hover {
   color: blue;
+  background-image: none;
 }
 
 .q6pdBTMghrQStVDVbFkM { /* Button Switch With Hover*/
@@ -2182,7 +2255,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.RygkJgZmBHTETlLP3C3i {
   font-weight: bolder;
   text-decoration: underline;
   transform: scale(1.05);
-}`, "",{"version":3,"sources":["webpack://./src/pages/AuthPage/AuthPage.module.scss"],"names":[],"mappings":"AAAA;EACE,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,uBAAA;EACA,aAAA;EACA,yBAAA;AACF;;AAEA;EACE,iBAAA;EACA,WAAA;EACA,mBAAA;AACF;;AAEA,wBAAA,yCAAA;EACE,WAAA;EACA,gBAAA;EACA,aAAA;EACA,sBAAA;EACA,mBAAA;AACF;AAAE;EACE,UAAA;EACA,YAAA;EACA,sBAAA;EACA,kBAAA;EACA,eAAA;EACA,mBAAA;AAEJ;AADI;EACE,WAAA;AAGN;;AAEA,wBAAA,4BAAA;EACE,eAAA;EACA,WAAA;EACA,iBAAA;EACA,gBAAA;AACF;AACE,8BAAA,uDAAA;EAEE,WAAA;EACA,mBAAA;EACA,0BAAA;EACA,sBAAA;AAAJ","sourcesContent":[".AuthPage {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  height: 100vh;\n  background-color: #f0f0f0;\n}\n\n.logo {\n  font-size: 2.5rem;\n  color: #333;\n  margin-bottom: 20px;\n}\n\n.credentialsContainer {    /* Container Includes the inputes in it */\n  width: 100%;\n  max-width: 400px;\n  padding: 20px;\n  border: 2px solid #ccc; \n  border-radius: 10px; \n  .input {\n    width: 95%;\n    height: 40px;\n    border: 1px solid #ccc; \n    border-radius: 5px; \n    padding: 0 10px; \n    margin-bottom: 15px;\n    &:hover {\n      color: blue;\n    }\n  }\n\n}\n.switchButton { /* Button Switch With Hover*/\n  cursor: pointer;\n  color: blue;\n  font-size: 1.2rem;\n  margin-top: 20px;\n\n  &:hover { /* Only way to have hover in the same gotta use the & */\n\n    color: navy;\n    font-weight: bolder;\n    text-decoration: underline;\n    transform: scale(1.05)\n  }\n}\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/pages/AuthPage/AuthPage.module.scss"],"names":[],"mappings":"AAAA;EACE,qFAAA;AACF;;AAEA;EACE,aAAA;EACA,sBAAA;EACA,mBAAA;EACA,uBAAA;EACA,aAAA;AACF;;AAEA;EACE,iBAAA;EACA,WAAA;EACA,mBAAA;AACF;;AAEA,wBAAA,yCAAA;EACE,WAAA;EACA,gBAAA;EACA,aAAA;EACA,sBAAA;EACA,mBAAA;AACF;AAAE;EACE,UAAA;EACA,YAAA;EACA,sBAAA;EACA,6FAAA;EACA,kBAAA;EACA,eAAA;EACA,mBAAA;AAEJ;AADI;EACE,WAAA;EACA,sBAAA;AAGN;;AAEA,wBAAA,4BAAA;EACE,eAAA;EACA,WAAA;EACA,iBAAA;EACA,gBAAA;AACF;AACE,8BAAA,uDAAA;EAEE,WAAA;EACA,mBAAA;EACA,0BAAA;EACA,sBAAA;AAAJ","sourcesContent":["html {\n  background-image: linear-gradient(to top, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.5));\n}\n\n.AuthPage {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  height: 100vh;\n}\n\n.logo {\n  font-size: 2.5rem;\n  color: #333;\n  margin-bottom: 20px;\n}\n\n.credentialsContainer {    /* Container Includes the inputes in it */\n  width: 100%;\n  max-width: 400px;\n  padding: 20px;\n  border: 2px solid #ccc; \n  border-radius: 10px; \n  .input {\n    width: 95%;\n    height: 40px;\n    border: 1px solid #ccc; \n    background-image: linear-gradient(to top, rgb(255 251 251 / 10%), rgb(111 100 100 / 50%));\n    border-radius: 5px; \n    padding: 0 10px; \n    margin-bottom: 15px;\n    &:hover {\n      color: blue;\n      background-image: none;\n    }\n  }\n\n}\n.switchButton { /* Button Switch With Hover*/\n  cursor: pointer;\n  color: blue;\n  font-size: 1.2rem;\n  margin-top: 20px;\n\n  &:hover { /* Only way to have hover in the same gotta use the & */\n\n    color: navy;\n    font-weight: bolder;\n    text-decoration: underline;\n    transform: scale(1.05)\n  }\n}\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"AuthPage": `RygkJgZmBHTETlLP3C3i`,
@@ -2219,7 +2292,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `html {
 }
 
 .RZqTJBeYN7RXwcHgPFys {
-  height: 100vh;
+  height: 98vh;
   display: grid;
   grid-template-columns: 1.6fr 3.5fr 3fr;
   grid-template-rows: 1fr;
@@ -2249,7 +2322,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `html {
 .k3gC92i2OCalY2XgNRZK:hover {
   background-color: #8c1225;
   font-weight: bolder;
-}`, "",{"version":3,"sources":["webpack://./src/pages/NewOrderPage/NewOrderPage.module.scss"],"names":[],"mappings":"AAAA;EACE,qFAAA;AACF;;AAEA;EACI,aAAA;EACA,aAAA;EACA,sCAAA;EACA,uBAAA;EACA,kCAAA;EACA,oBAAA;AACJ;;AAEE;EAEE,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,mBAAA;AAAJ;;AAGE;EACE,cAAA;EACA,gBAAA;EACA,kBAAA;EACA,2BAAA;EACA,YAAA;EACA,kBAAA;EACA,qBAAA;EACA,kBAAA;EACA,sCAAA;AAAJ;AAEI;EACE,yBAAA;EACA,mBAAA;AAAN","sourcesContent":["html {\n  background-image: linear-gradient(to top, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.5));\n}\n\n.NewOrderPage {\n    height: 100vh;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 1fr;\n    /*background-color: var(--white);*/\n    border-radius: 2vmin;\n  }\n  \n  .NewOrderPage aside {\n    \n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 3vmin 2vmin;\n  }\n\n  .link {\n    display: block;\n    margin-top: 20px;\n    padding: 10px 20px;\n    background-color: lightblue;\n    color: white;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 5px;\n    transition: background-color 0.5s ease;\n\n    &:hover {\n      background-color: #8c1225;\n      font-weight: bolder;\n    }\n  }\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/pages/NewOrderPage/NewOrderPage.module.scss"],"names":[],"mappings":"AAAA;EACE,qFAAA;AACF;;AAEA;EACI,YAAA;EACA,aAAA;EACA,sCAAA;EACA,uBAAA;EACA,kCAAA;EACA,oBAAA;AACJ;;AAEE;EAEE,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,mBAAA;AAAJ;;AAGE;EACE,cAAA;EACA,gBAAA;EACA,kBAAA;EACA,2BAAA;EACA,YAAA;EACA,kBAAA;EACA,qBAAA;EACA,kBAAA;EACA,sCAAA;AAAJ;AAEI;EACE,yBAAA;EACA,mBAAA;AAAN","sourcesContent":["html {\n  background-image: linear-gradient(to top, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.5));\n}\n\n.NewOrderPage {\n    height: 98vh;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 1fr;\n    /*background-color: var(--white);*/\n    border-radius: 2vmin;\n  }\n  \n  .NewOrderPage aside {\n    \n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 3vmin 2vmin;\n  }\n\n  .link {\n    display: block;\n    margin-top: 20px;\n    padding: 10px 20px;\n    background-color: lightblue;\n    color: white;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 5px;\n    transition: background-color 0.5s ease;\n\n    &:hover {\n      background-color: #8c1225;\n      font-weight: bolder;\n    }\n  }\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"NewOrderPage": `RZqTJBeYN7RXwcHgPFys`,
@@ -2283,7 +2356,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `html {
 }
 
 .U7F51i6q23MB43wS4GeC {
-  height: 100vh;
+  height: 98vh;
   display: grid;
   grid-template-columns: 1.6fr 3.5fr 3fr;
   grid-template-rows: 1fr;
@@ -2316,7 +2389,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `html {
 .V0fkWUMjSEabl62xFKEv:hover {
   background-color: #8c1225;
   font-weight: bolder;
-}`, "",{"version":3,"sources":["webpack://./src/pages/OrderHistoryPage/OrderHistoryPage.module.scss"],"names":[],"mappings":"AAAA;EACE,wFAAA;AACF;;AAEA;EACI,aAAA;EACA,aAAA;EACA,sCAAA;EACA,uBAAA;EACA,8BAAA;EACA,oBAAA;EACA,gBAAA;AACJ;;AAGE;EACE,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,mBAAA;EACA,YAAA;AAAJ;;AAGE;EACE,iBAAA;EACA,cAAA;EACA,gBAAA;EACA,kBAAA;EACA,2BAAA;EACA,YAAA;EACA,kBAAA;EACA,qBAAA;EACA,kBAAA;EACA,sCAAA;AAAJ;AAEI;EACE,yBAAA;EACA,mBAAA;AAAN","sourcesContent":["html {\n  background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.5));\n}\n\n.OrderHistoryPage {\n    height: 100vh;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 1fr;\n    background-color: var(--white);\n    border-radius: 2vmin;\n    overflow: hidden; \n    \n  }\n  \n  .OrderHistoryPage .aside {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 3vmin 2vmin;\n    height: 90vh;\n  }\n\n  .link {\n    font-size: 1.5rem;\n    display: block;\n    margin-top: 20px;\n    padding: 10px 20px;\n    background-color: lightblue;\n    color: white;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 5px;\n    transition: background-color 0.5s ease;\n\n    &:hover {\n      background-color: #8c1225;\n      font-weight: bolder;\n    }\n  }\n"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/pages/OrderHistoryPage/OrderHistoryPage.module.scss"],"names":[],"mappings":"AAAA;EACE,wFAAA;AACF;;AAEA;EACI,YAAA;EACA,aAAA;EACA,sCAAA;EACA,uBAAA;EACA,8BAAA;EACA,oBAAA;EACA,gBAAA;AACJ;;AAGE;EACE,aAAA;EACA,sBAAA;EACA,8BAAA;EACA,mBAAA;EACA,mBAAA;EACA,YAAA;AAAJ;;AAGE;EACE,iBAAA;EACA,cAAA;EACA,gBAAA;EACA,kBAAA;EACA,2BAAA;EACA,YAAA;EACA,kBAAA;EACA,qBAAA;EACA,kBAAA;EACA,sCAAA;AAAJ;AAEI;EACE,yBAAA;EACA,mBAAA;AAAN","sourcesContent":["html {\n  background-image: linear-gradient(to bottom, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.5));\n}\n\n.OrderHistoryPage {\n    height: 98vh;\n    display: grid;\n    grid-template-columns: 1.6fr 3.5fr 3fr;\n    grid-template-rows: 1fr;\n    background-color: var(--white);\n    border-radius: 2vmin;\n    overflow: hidden; \n    \n  }\n  \n  .OrderHistoryPage .aside {\n    display: flex;\n    flex-direction: column;\n    justify-content: space-between;\n    align-items: center;\n    margin: 3vmin 2vmin;\n    height: 90vh;\n  }\n\n  .link {\n    font-size: 1.5rem;\n    display: block;\n    margin-top: 20px;\n    padding: 10px 20px;\n    background-color: lightblue;\n    color: white;\n    text-align: center;\n    text-decoration: none;\n    border-radius: 5px;\n    transition: background-color 0.5s ease;\n\n    &:hover {\n      background-color: #8c1225;\n      font-weight: bolder;\n    }\n  }\n"],"sourceRoot":""}]);
 // Exports
 ___CSS_LOADER_EXPORT___.locals = {
 	"OrderHistoryPage": `U7F51i6q23MB43wS4GeC`,
@@ -3419,4 +3492,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.678a84e4369a48391528666c758bc25e.js.map
+//# sourceMappingURL=App.ab100d880ec0778264d79542fadc40ac.js.map

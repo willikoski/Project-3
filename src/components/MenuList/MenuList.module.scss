@@ -6,5 +6,27 @@
     padding: 3vmin;
     height: 80vh;
     width: 75%;
+    overflow-y: scroll;
+    padding-right: 13px;
     }
 
+      /* Custom scrollbar */
+      .MenuList::-webkit-scrollbar {
+        margin-right: 1rem;
+        width: 10px;
+      }
+      
+      .MenuList::-webkit-scrollbar-track {
+        background: rgba(245, 245, 245, 0); 
+        border-radius: 5px;
+      }
+      
+      .MenuList::-webkit-scrollbar-thumb {
+        background: #888; 
+        border-radius: 5px; 
+        cursor: pointer;
+      }
+      
+      .MenuList::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+      }

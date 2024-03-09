@@ -9,6 +9,21 @@
     border: .1vmin solid var(--tan-3);
     border-bottom: 4px solid black;
     border-radius: 2px;
+
+    .githubLink {
+      margin-top: 5px;
+      font-size: 20px;
+      color: #007bff;
+    }
+  
+    .githubLink a {
+      text-decoration: none;
+      color: inherit;
+    }
+  
+    .githubLink a:hover {
+      text-decoration: underline;
+    }
   }
   
   .MenuListItem .emoji {
@@ -17,6 +32,12 @@
     background-color: var(--tan-1);
     border: .1vmin solid var(--tan-3);
     border-radius: 1vmin;
+  }
+
+  .emojiImage {
+    width: 4vw; 
+    height: 4vw; 
+    border-radius: 50%;
   }
   
   .MenuListItem .buy {

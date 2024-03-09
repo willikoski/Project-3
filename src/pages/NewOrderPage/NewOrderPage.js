@@ -54,8 +54,8 @@ export default function NewOrderPage({ user, setUser }) {
   async function handleCheckout() {
     await ordersAPI.checkout();
   
-    // Fetch updated user data
-    const updatedUserData = await usersAPI.getUser(user._id); // Assuming user._id contains the user ID
+
+    const updatedUserData = await usersAPI.getUser(user._id); 
     const newBalance = updatedUserData.balance;
   
     // Update user state
@@ -88,7 +88,6 @@ export default function NewOrderPage({ user, setUser }) {
         handleChangeQty={handleChangeQty}
         handleCheckout={handleCheckout}
       />
-      
     </main>
     
   );
