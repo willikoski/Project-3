@@ -1,5 +1,8 @@
 # Rent A Coder
 A parody website created of my classmates where you can rent their programming ability on an hourly basis.
+
+![Image Description](https://i.gyazo.com/771210c097114e5a409e5a3cbdbfaa86.png)
+
 ##  Seed File To Generate A Database on MongoDB 
 ```javascript
 require('dotenv').config();
