@@ -225,3 +225,19 @@ userSchema.pre('save', async function(next) {
 
 module.exports = mongoose.model('User', userSchema);
 ```
+## Install 
+1. Begin with opening your terminal, vscode will do. 
+2. Git clone **git@github.com:willikoski/Project-3.git **the link this will pull the files you need.
+3. Next go to the directory and run the command ``npm i``.
+4. Navigate to the package.json file and install and update any of dependencies needed for the project.
+5. You will then have to create a .env file in the parent file and connect to your mongodb,
+``MONGO_URI=mongodb+srv://USERNAMEHERE:PASSWORDHERE@cluster0.zjvqipx.mongodb.net/DATABASENAMEHERE?retryWrites=true&w=majority``
+``SECRET=USE ANY GENERATED KEY HERE`` [sha 256 generator](http://https://emn178.github.io/online-tools/sha256.html "sha 256 generator")
+
+## Use it yourself!
+1. After installing the proper packages and files, have a look at the seed file and change any pathing for images, names, categories or more to your own liking. And Save the file.
+2. Next run the npm run seed to generate the database.
+3. Now you should be able to access localhost:8000 to see your page after running npm run dev to start the server!
+
+
+
