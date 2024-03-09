@@ -1,62 +1,227 @@
-# Big Poppa Code React Starter Kit
-This Starter Kit is being created for New Web Developers that want to get started with react
+# Rent A Coder
+A parody website created of my classmates where you can rent their programming ability on an hourly basis.
+##  Seed File To Generate A Database on MongoDB 
+```javascript
+require('dotenv').config();
+require('./database');
 
-Most people use a CLI Tool like Vue-Cli or Create React App and no idea what these things are doing
+const Category = require('../models/category');
+const Item = require('../models/item');
 
-The goal of this is for it to be a tool that let's you learn JS at a new level because you have access to
-everything under the hood and no opinionated set up
+(async function() {
 
-I will base all my tutorials on this Starter Kit.
+  await Category.deleteMany({});
+  const categories = await Category.create([
+    {name: 'Programmers', sortOrder: 10},
+    {name: 'Programs', sortOrder: 20},
+    {name: 'Videos', sortOrder: 30},
+    {name: 'CheatSheets', sortOrder: 40},
+    {name: 'Languages', sortOrder: 50},
+    {name: 'Desserts', sortOrder: 60},
+    {name: 'Drinks', sortOrder: 70},
+  ]);
 
-# Who Am I?
+  await Item.deleteMany({});
+  const items = await Item.create([
+    { name: 'Arthur', emoji: '/img/Arthur.png', category: categories[0]._id, price: 1000.95, github: 'https://github.com/arthurbernierjr' },
+    { name: 'Josh', emoji: '/img/Josh.png', category: categories[0]._id, price: 400.95, github: 'https://github.com/yourusername/yourproject' },
+    {name: 'Teo', emoji:'/img/Teo.png', category: categories[0], price: 300.95, github: 'https://github.com/yourusername/yourproject' },
+    {name: 'Bryce', emoji: '/img/Bryce.jpg', category: categories[0], price: 13.95, github: 'https://github.com/brycesexton' },
+    {name: 'Tyler', emoji: '/img/Tyler.png', category: categories[0], price: 25.95, github: 'https://github.com/tylerpierson/' },
+    {name: 'Danny', emoji: '/img/Danny.jpg', category: categories[0], price: 25.99, github: 'https://github.com/dwheeler7' },
+    {name: 'Jalen', emoji: '/img/Jalen.png', category: categories[0], price: 9.95, github: 'https://github.com/jalensmith17' },
+    {name: 'Jeremy', emoji: '/img/Jeremy.png', category: categories[0], price: 5.95, github: 'https://github.com/Jcasanova1990/' },
+    {name: 'Juan', emoji: '/img/juan.png', category: categories[0], price: 7.95, github: 'https://github.com/zjuan4101/' },
+    {name: 'William', emoji: '/img/william.jpg', category: categories[0], price: 0.95, github: 'https://github.com/willikoski/' },
+    {name: 'BlackJack Code', emoji: '/img/Blackjack.jpg', category: categories[1], price: 19.95, github: 'https://github.com/willikoski/Blackjack' },
+    {name: 'Tip Splitter Code', emoji: '/img/TipSplitter.png', category: categories[1], price: 14.95, github: 'https://github.com/willikoski/HourlyCalculator' },
+    {name: 'BookMarker Code', emoji: '/img/Bookmarks.png', category: categories[1], price: 14.95, github: 'https://github.com/willikoski/bookmarks' },
+    {name: 'Rick Roll', emoji: '/img/RickRoll.jpg', category: categories[2], price: 0.00, github: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' },
+    {name: 'Willikoski Twitch', emoji: '/img/william.jpg', category: categories[2], price: 0.00, github: 'https://www.twitch.tv/willikoski' },
+    {name: 'Arthur Youtube', emoji: '/img/Arthur.png', category: categories[2], price: 0.00, github: 'https://www.youtube.com/@bigpoppacode' },
+    {name: 'Arthur PM2 ', emoji: '/img/Arthur.png', category: categories[3], price: 10.00, github: 'https://liberty.sfs-flex.com/cheatsheets/pm2/' },
+    {name: 'Arthur React ', emoji: '/img/Arthur.png', category: categories[3], price: 10.00, github: 'https://liberty.sfs-flex.com/cheatsheets/react/' },
+    {name: 'Arthur Router', emoji: '/img/Arthur.png', category: categories[3], price: 10.00, github: 'https://liberty.sfs-flex.com/cheatsheets/react-router/' },
+    {name: 'Arthur Deployment', emoji: '/img/Arthur.png', category: categories[3], price: 10.00, github: 'https://liberty.sfs-flex.com/cheatsheets/cloud-deployment/' },
+    {name: 'Arthur Coffee Script', emoji: '/img/Arthur.png', category: categories[4], price: 999999.00, github: 'https://github.com/arthurbernierjr/coffeescript' },
+  ]);
 
-![bigpoppacode.io](https://i.imgur.com/PjuyuzK.jpeg)
+  console.log(items)
 
-I am Arthur Bernier Jr. I work as freelance fullstack web developer and attraction marketing consultant specializing in supporting e-commerce brands,
-subscription box sites, social activists, religious/non-profit leaders and creative entrepreneurs(i.e. barbers, artists, musicians, stylists, models and photographers).
-I have a passion for helping entrepreneurs reach their perfect audience and helping you communicate to that audience in a way that makes them know, like and trust you. I also am a Part-Time Instructor at General Assembly, a Senior Director at a National Non-Profit, a Multi Time Start-Up Founder who has raised 7 figures in VC, Creator and Maintainer of MambaScript, and Multi Time Tech Lead at startups from Seed Stage to Billion Dollar Valuation.
+  process.exit();
 
-
-# My Favorite Online Instructors
-
-[__Colt Steele__](https://www.youtube.com/channel/UCrqAGUPPMOdo0jfQ6grikZw)
-
-[__Brad Traversy__](https://www.youtube.com/channel/UC29ju8bIPH5as8OGnQzwJyA)
-
-[__Jose Santos Garcia__](https://www.youtube.com/channel/UC46wWUso9H5KPQcoL9iE3Ug)
-
-[__Stephen Grider__](https://www.youtube.com/channel/UCQCaS3atWyNHEy5PkDXdpNg/)
-
-## Steps
-
-
-**Start the dev server**
-```bash
-npm run dev
+})();
 ```
-### or
-```bash
-yarn dev
+## Categories / Model Schema for the project 
+### Category.js
+```javascript 
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const categorySchema = new Schema({
+  name: { type: String, required: true },
+  sortOrder: Number
+}, {
+  timestamps: true
+});
+
+module.exports = mongoose.model('Category', categorySchema); 
+```
+### Item.js
+```javascript 
+const mongoose = require('mongoose');
+// Ensure the Category model is processed by Mongoose
+require('./category');
+
+const itemSchema = require('./itemSchema');
+
+module.exports = mongoose.model('Item', itemSchema);
 ```
 
-**Build files for production**
-```bash
-yarn build
-```
-### or
+### ItemSchema.js
+```javascript 
+const item = require('./item');
 
-```bash
-npm run build
-```
+const Schema = require('mongoose').Schema;
 
-**Deploy for production script**
-```bash
-npm start
-```
-### or
-```bash
-yarn start
-```
+const itemSchema = new Schema({
+  name: { type: String, required: true },
+  emoji: String,
+  category: { type: Schema.Types.ObjectId, ref: 'Category' },
+  price: { type: Number, required: true, default: 0 },
+  github: String
+}, {
+  timestamps: true
+});
 
+module.exports = itemSchema;
+```
+### Order.js
+```javascript 
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const itemSchema = require('./itemSchema');
 
-This starter kit uses Gulp, Webpack, Browsersync, Nodemon and Babel to create a unified development environment with hot reloading and automatically building files to disk. It uses the concept of `Train How You Fight, Fight Like You Train`. Instead of building files in memory in dev mode, this starter kit builds your files directly to the public folder and statically serves the public folder. This means that the public folder is serving your site just like it would in production and this meant to be a simple full stack react starter kit that any learner can build upon.
+const lineItemSchema = new Schema({
+  qty: { type: Number, default: 1 },
+  item: itemSchema
+}, {
+  timestamps: true,
+  toJSON: { virtuals: true }
+});
+
+lineItemSchema.virtual('extPrice').get(function() {
+  // 'this' is bound to the lineItem subdoc
+  return this.qty * this.item.price;
+});
+
+const orderSchema = new Schema({
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
+  lineItems: [lineItemSchema],
+  isPaid: { type: Boolean, default: false }
+}, {
+  timestamps: true,
+  toJSON: { virtuals: true }
+});
+
+orderSchema.virtual('orderTotal').get(function() {
+  return this.lineItems.reduce((total, item) => total + item.extPrice, 0);
+});
+
+orderSchema.virtual('totalQty').get(function() {
+  return this.lineItems.reduce((total, item) => total + item.qty, 0);
+});
+
+orderSchema.virtual('orderId').get(function() {
+  return this.id.slice(-6).toUpperCase();
+});
+
+orderSchema.statics.getCart = function(userId) {
+  // 'this' is the Order model
+  return this.findOneAndUpdate(
+    // query
+    { user: userId, isPaid: false },
+    // update
+    { user: userId },
+    // upsert option will create the doc if
+    // it doesn't exist
+    { upsert: true, new: true }
+  );
+};
+
+orderSchema.methods.addItemToCart = async function(itemId) {
+  const cart = this;
+  // Check if item already in cart
+  const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
+  if (lineItem) {
+    lineItem.qty += 1;
+  } else {
+    const item = await mongoose.model('Item').findById(itemId);
+    cart.lineItems.push({ item });
+  }
+  return cart.save();
+};
+
+// Instance method to set an item's qty in the cart (will add item if does not exist)
+orderSchema.methods.setItemQty = function(itemId, newQty) {
+  // this keyword is bound to the cart (order doc)
+  const cart = this;
+  // Find the line item in the cart for the menu item
+  const lineItem = cart.lineItems.find(lineItem => lineItem.item._id.equals(itemId));
+  if (lineItem && newQty <= 0) {
+    // Calling remove, removes itself from the cart.lineItems array
+    lineItem.deleteOne();
+  } else if (lineItem) {
+    // Set the new qty - positive value is assured thanks to prev if
+    lineItem.qty = newQty;
+  }
+  // return the save() method's promise
+  return cart.save();
+};
+
+module.exports = mongoose.model('Order', orderSchema);
+```
+### User
+```javascript
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const Schema = mongoose.Schema;
+
+const SALT_ROUNDS = 6;
+
+const userSchema = new Schema({
+  name: { type: String, required: true },
+  email: {
+    type: String,
+    unique: true,
+    trim: true,
+    lowercase: true,
+    required: true
+  },
+  password: {
+    type: String,
+    trim: true,
+    minlength: 3,
+    required: true
+  },
+  balance: { type: Number, required: true, default: 10000 }
+}, {
+  timestamps: true,
+  toJSON: {
+    transform: function(doc, ret) {
+      delete ret.password;
+      return ret;
+    }
+  }
+});
+
+userSchema.pre('save', async function(next) {
+  // 'this' is the use document
+  if (!this.isModified('password')) return next();
+  // update the password with the computed hash
+  this.password = await bcrypt.hash(this.password, SALT_ROUNDS);
+  return next();
+});
+
+module.exports = mongoose.model('User', userSchema);
+```
